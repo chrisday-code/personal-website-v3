@@ -1,0 +1,202 @@
+import { Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { Element } from "react-scroll";
+import { useRef } from "react";
+import { Iconbar } from "./Iconbar";
+import { FormControl, TextField, Button } from "@mui/material";
+import { FloatingButton } from "../styled-components/floating-button";
+import { ShadowButton } from "../styled-components/floating-button";
+// import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import { useForm, Controller } from "react-hook-form";
+
+interface FormData {
+  from_name: string;
+  from_email: string;
+  subject: string;
+  message: string;
+}
+
+export const Contact = (props: any) => {
+  const form = useRef<HTMLFormElement>(null);
+
+  const sendEmail = () => {
+    if (form.current) {
+      emailjs
+        .sendForm(
+          "service_po3ajlo",
+          "template_cddtu5v",
+          form.current,
+          "ox0FtSFs-iATUKmK9"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
+  };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const theme = useTheme();
+  return (
+    <Element id="Contact" name="Contact">
+      <Box
+        sx={{
+          minHeight: "95vh",
+          paddingBottom: "5vh",
+          paddingTop: "5vh",
+          paddingLeft: "5vw",
+          paddingRight: "5vw",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-around",
+          backgroundImage: `linear-gradient(to top, ${theme.palette.background.contact}, ${theme.palette.background.contactGradient})`,
+        }}
+        bgcolor={theme.palette.background.contact}
+      >
+        <Typography variant="h2">Contact</Typography>
+        <Typography variant="body1">
+          Send me an email at chrisday046@gmail.com or fill in this form and
+          allow me to do it for you
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // alignItems: "center",
+            maxWidth: "900px",
+            padding: "5%",
+            width: "100%",
+            // height: "50vh",
+          }}
+        >
+          <form
+            onSubmit={handleSubmit((data) => {
+              sendEmail();
+            })}
+            ref={form}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+              maxHeight: "45vh",
+              flexGrow: 1,
+            }}
+          >
+            {/* name */}
+            <Controller
+              name="from_name"
+              control={control}
+              defaultValue=""
+              rules={{ required: "Name is required" }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  id="outlined-basic"
+                  name="from_name"
+                  label="Name"
+                  variant="filled"
+                  error={!!errors.from_name}
+                  helperText={errors.from_name?.message}
+                />
+              )}
+            />
+            {/* email */}
+            <Controller
+              name="from_email"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
+                },
+              }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  id="outlined-basic"
+                  name="from_email"
+                  label="E-mail"
+                  variant="filled"
+                  error={!!errors.from_email}
+                  helperText={errors.from_email?.message}
+                />
+              )}
+            />
+            {/* subject */}
+            <Controller
+              name="subject"
+              control={control}
+              defaultValue=""
+              rules={{ required: "Subject is required" }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  id="outlined-basic"
+                  name="subject"
+                  label="Subject"
+                  variant="filled"
+                  error={!!errors.subject}
+                  helperText={errors.subject?.message}
+                />
+              )}
+            />
+            <Controller
+              name="message"
+              control={control}
+              defaultValue=""
+              rules={{ required: "Message is required" }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  id="outlined-basic"
+                  name="message"
+                  label="Message"
+                  variant="filled"
+                  multiline
+                  rows={4}
+                  error={!!errors.message}
+                  helperText={errors.message?.message}
+                />
+              )}
+            />
+            <FloatingButton
+              color="primary"
+              variant="round"
+              sx={{
+                width: "50%",
+                alignSelf: "center",
+                marginTop: "2em",
+                opacity: 1,
+              }}
+            >
+              Submit
+            </FloatingButton>
+            <ShadowButton></ShadowButton>
+          </form>
+        </Box>
+        <Typography variant="body1" sx={{ padding: "3%" }}>
+          Find me online at
+        </Typography>
+        <Iconbar />
+      </Box>
+    </Element>
+  );
+};

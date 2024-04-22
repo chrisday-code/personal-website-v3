@@ -1,0 +1,36 @@
+.triangle {
+    svg {
+        --dark-color: #635bff;
+        --light-color: #80e9ff;
+        cursor: pointer;
+    }
+    
+    #redGroup {
+        fill: var(--dark-color)
+    }
+    
+    #greenGroup {
+        fill: var(--light-color)
+    }
+    
+    #red1, #green1, #red2 {
+        transition: all 1s ease;
+    }
+    
+    #red2 {
+        transform: translateX(-100%);
+    }
+    
+    svg:hover #green1 {
+        transform: translate(20%);
+    }
+    
+    svg:hover #red1 {
+        transform: translateX(40%);
+        opacity: 0;
+    }
+    svg:hover #red2 {
+        transform: translateX(0%);
+    }
+}
+
