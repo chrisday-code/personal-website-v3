@@ -17,58 +17,67 @@ export const Hero = (props: any) => {
     <Element name="Home" id="Home">
       <Box
         sx={{
-          minHeight: "105vh",
+          minHeight: "100vh",
           paddingBottom: "10vh",
-          paddingTop: "5vh",
+          paddingTop: "10vh",
           width: "100vw",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
           backgroundImage: `linear-gradient(to top, ${theme.palette.background.hero}, ${theme.palette.background.heroGradient})`,
         }}
-        bgcolor={theme.palette.background.hero}
       >
-        <Grid
-          container
-          spacing={8}
+        <Box
           sx={{
+            display: "flex",
+            flexDirection: "column",
             width: "100vw",
-            height: "80vh",
-            padding: "5svh 5vh 2vh 5vh",
+            maxWidth: "1500px",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-          <Grid
-            item
-            xs={6}
+          <Box
             sx={{
+              width: "100%",
+              height: "80vh",
+              padding: "0 10% 0 10%",
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
+              flexDirection: { xs: "column", lg: "row" },
+              justifyContent: { xs: "center" },
+              gap: { xs: "10em", lg: "4em" },
             }}
           >
-            <Typography variant="h2">Hi, I'm Chris.</Typography>
-            <Typography variant="h4">
-              I'm a software engineer and I love making stuff
-            </Typography>
-          </Grid>
-          {/* <Grid item xs={2}></Grid> */}
-          <Grid
-            item
-            xs={6}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Laptop />
-          </Grid>
-        </Grid>
+            <Box
+              sx={{
+                flex: { lg: 1 },
+                display: "flex",
+                flexDirection: "column",
+                paddingBottom: { xs: "0", lg: "20vh" },
+                alignItems: "center",
+                justifyContent: { xs: "center" },
+              }}
+            >
+              <Typography variant="h1">Hi, I'm Chris.</Typography>
+              <Typography variant="h4">
+                I'm a software engineer and I love making stuff
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                flex: { xs: 0, lg: 1 },
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Laptop />
+            </Box>
+          </Box>
 
-        <Iconbar />
+          <Iconbar />
+        </Box>
       </Box>
     </Element>
   );

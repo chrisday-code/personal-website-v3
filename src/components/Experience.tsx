@@ -9,13 +9,51 @@ export const Experience = (props: any) => {
   const jobs: JobInterface[] = [
     {
       position: "Software Engineer",
-      company: "TfNSW",
+      company: "Transport for New South Wales - Transport Connect",
       start: "August 2021",
-      description:
-        "Working on a cat, looking at a picture of a dog and doing a great job with it really",
-      end: "Current",
+      end: "Present",
+      description: [
+        "Building and maintaining front & back end components for the Transport connect system." +
+          "Working closely with product teams to implement new features and improve products ",
+      ],
       link: "https://connect.transportnsw.info/",
-      skills: ["Javascript", "Typescript"],
+      skills: [
+        "React",
+        "Angular",
+        "NodeJS",
+        "AWS",
+        "SQL",
+        "Javascript",
+        "Typescript",
+      ],
+    },
+    {
+      position: "Graduate Engineer",
+      company: "Transport for New South Wales",
+      start: "January 2020",
+      end: "August 2021",
+      description: [
+        "Creating projects that streamline work for teams across transport. I created sensors used to monitor track faults at central station, helped make a test board",
+      ],
+      link: "https://transportnsw.info/",
+      skills: [
+        "Python",
+        "Javascript",
+        "Rasperry Pi",
+        "Signal Engineering",
+        "VBA",
+      ],
+    },
+    {
+      position: "Intern",
+      company: "G.James Glass & Aluminium",
+      start: "January 2016",
+      end: "December 2019",
+      description: [
+        "Fixing PCBs and updating code on factory machinery. Also, helping with installation of new machinery and designing new products",
+      ],
+      link: "https://transportnsw.info/",
+      skills: ["Python", "Wiring", "VBA", "Soldering"],
     },
   ];
 
@@ -30,7 +68,8 @@ export const Experience = (props: any) => {
     <Element id="Experience" name="Experience">
       <Box
         sx={{
-          minHeight: "105vh",
+          backgroundImage: `linear-gradient(to top, ${theme.palette.background.experience}, ${theme.palette.background.experienceGradient})`,
+          minHeight: "100vh",
           paddingBottom: "5vh",
           paddingTop: "10vh",
           paddingLeft: "5vw",
@@ -38,14 +77,22 @@ export const Experience = (props: any) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "flex-start",
-          backgroundImage: `linear-gradient(to top, ${theme.palette.background.experience}, ${theme.palette.background.experienceGradient})`,
         }}
-        bgcolor={theme.palette.background.experience}
       >
-        <Typography variant="h2">Experience</Typography>
-        <Typography variant="h4">Places I've worked</Typography>
-        {renderJobs(jobs)}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            maxWidth: "1500px",
+          }}
+        >
+          <Typography variant="h1" sx={{ marginBottom: "3vh" }}>
+            Experience
+          </Typography>
+          {renderJobs(jobs)}
+        </Box>
       </Box>
     </Element>
   );

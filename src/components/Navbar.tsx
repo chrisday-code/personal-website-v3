@@ -17,7 +17,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Divider from "@mui/material/Divider";
 import SwipeableDrawer from "@mui/material/Drawer";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { Logo } from "../images/svg-animations/Logo/Logo";
 
@@ -40,9 +40,9 @@ export const Navbar = ({ toggleTheme }: NavbarProps) => {
       <List
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", sm: "row" },
+          flexDirection: { xs: "column", md: "row" },
           justifyContent: "space-around", // Evenly space elements
-          height: { xs: "80vh", sm: "inherit" }, // Set width to 100%
+          height: { xs: "80vh", md: "inherit" }, // Set width to 100%
         }}
       >
         {navItems.map((item, index) => (
@@ -118,7 +118,46 @@ export const Navbar = ({ toggleTheme }: NavbarProps) => {
   );
 
   //wow
+  const [logoHovered, setLogoHovered] = useState(false);
+  const [logo, setLogo] = useState("CHRIS");
+  const [count, setCount] = useState(0);
+  const firstRef = useRef(false);
+  //do the effect in here remember it runs twice lol
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  //print something every second
+  // const interval = useRef<number | null>(null);
 
+  const [running, setRunning] = useState(false);
+  useEffect(() => {
+    let iteration = 0;
+    // console.log("hovered: ", logoHovered);
+    if (firstRef.current && !logoHovered) {
+      return;
+    }
+    firstRef.current = true;
+    let interval = window.setInterval(() => {
+      setLogo(
+        logo
+          .split("")
+          .map((letter, index) => {
+            if (index < iteration) {
+              return "CHRIS"[index];
+            }
+
+            return letters[Math.floor(Math.random() * 26)];
+          })
+          .join("")
+      );
+
+      if (iteration >= logo.length) {
+        window.clearInterval(interval);
+      }
+
+      iteration += 1 / 3;
+    }, 60);
+    // Cleanup function to clear the interval when the component unmounts or when dependencies change
+    return;
+  }, [logoHovered]);
   //scroll items across this part
 
   return (
@@ -162,19 +201,26 @@ export const Navbar = ({ toggleTheme }: NavbarProps) => {
               smooth={true}
               duration={500}
               offset={0}
-              style={{ cursor: "pointer", height: "100%", paddingTop: "0.8vh" }}
+              style={{ cursor: "pointer", height: "100%" }}
             >
-              <Logo
+              <Typography
+                onMouseEnter={() => setLogoHovered(true)}
+                onMouseLeave={() => setLogoHovered(false)}
+                variant="h5"
+              >
+                {logo}
+              </Typography>
+              {/* <Logo
                 height="6vh"
                 stroke={theme.palette.text.primary}
                 strokeWidth={6}
-              />
+              /> */}
             </ScrollLink>
             <LightDarkSwitch defaultChecked onChange={toggleTheme} />
           </Box>
           <Box
             sx={{
-              display: { xs: "none", sm: "block" },
+              display: { xs: "none", md: "block" },
             }}
           >
             {links(false)}
@@ -185,7 +231,7 @@ export const Navbar = ({ toggleTheme }: NavbarProps) => {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ display: { xs: "block", sm: "none" } }}
+            sx={{ display: { xs: "block", md: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -202,7 +248,7 @@ export const Navbar = ({ toggleTheme }: NavbarProps) => {
           }}
           sx={{
             background: theme.palette.background.navbar,
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: "100vw",

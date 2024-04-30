@@ -1,8 +1,9 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import "@fontsource/space-mono";
 
 //typescript will see this and just add them in because its a thing of beauty
 // I'm going to change the theme options in here so I can set multiple backgrounds
@@ -45,48 +46,22 @@ export const darkTheme = createTheme({
   components: {
     MuiTypography: {
       styleOverrides: {
-        gutterBottom: {
-          // marginBottom: "1em",
-        },
+        gutterBottom: {},
       },
     },
     MuiButton: {
-      // styleOverrides: {
-      //   root: {
-      //     "&::after": {
-      //       fontFamily: "Arimo",
-      //       fontWeight: "700",
-      //       fontSize: "1em",
-      //       transform: "translate(-.3rem, -.3rem);",
-      //       transition: "0.1s",
-      //       position: "absolute",
-      //       width: "100%",
-      //       height: "100%",
-      //       padding: "0.7em 2em",
-      //       backgroundColor: "#F5F5F5",
-      //       content: `attr(data-content)`,
-      //       color: "#1e1e1e",
-      //     },
-      //     "&:hover::after": {
-      //       // Style for hover
-      //       transform: "translate(0rem, 0rem)", // Example change on hover
-      //     },
-      //   },
-      // },
       variants: [
         {
           props: { variant: "round" },
           style: {
             fontFamily: "Arimo",
             fontWeight: "400",
-            fontSize: "1em",
+            fontSize: "0.9em",
             textTransform: "none",
             padding: "0.7em 2em",
             border: "1px solid",
             margin: ".3rem .3rem",
-            borderRadius: "0px",
-            backgroundColor: "#1e1e1e",
-            // boxShadow: "5px 5px",
+            borderRadius: "1rem",
           },
         },
       ],
@@ -96,16 +71,29 @@ export const darkTheme = createTheme({
     fontFamily: "Open Sans",
     h1: {
       fontFamily: "Alegreya Sans",
+      fontSize: "4em",
+      textAlign: "center",
     },
     h2: {
+      fontSize: "3em",
+      paddingTop: "0",
       fontFamily: "Arimo",
       fontWeight: "600",
     },
     h3: {
+      fontSize: "2em",
       fontFamily: "Arimo",
-      fontWeight: "600",
+      fontWeight: "400",
     },
     h4: {
+      fontFamily: "Arimo",
+      textAlign: "center",
+    },
+    h5: {
+      fontFamily: "Space Mono",
+      fontSize: "2em",
+    },
+    caption: {
       fontFamily: "Arimo",
     },
   },
@@ -113,17 +101,18 @@ export const darkTheme = createTheme({
     mode: "dark",
     primary: {
       main: "#F5F5F5",
+      contrastText: "#c3012f",
     },
     background: {
       basic: "#1e1e1e",
       hero: "#091d2c",
       heroGradient: "#030B11",
-      about: "#293c51",
-      aboutGradient: "#37506D",
-      experience: "#2a092c",
-      experienceGradient: "#511155",
-      projects: "#5b0b1a",
-      projectsGradient: "#7F1024",
+      about: "#1F1F1F",
+      aboutGradient: "#141414",
+      experience: "#293C51",
+      experienceGradient: "#223244",
+      projects: "#1F1F1F", //"#7F1024",
+      projectsGradient: "#141414", //"#5b0b1a",
       contact: "#002223",
       contactGradient: "#001414", // this is a bit darker, I think its nicer to go a bit darker on these
       navbar: "#030B11",
@@ -132,24 +121,79 @@ export const darkTheme = createTheme({
 });
 
 export const lightTheme = createTheme({
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        gutterBottom: {},
+      },
+    },
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: "round" },
+          style: {
+            fontFamily: "Arimo",
+            fontWeight: "400",
+            fontSize: "0.9em",
+            textTransform: "none",
+            padding: "0.7em 2em",
+            border: "1px solid",
+            margin: ".3rem .3rem",
+            borderRadius: "1rem",
+          },
+        },
+      ],
+    },
+  },
+  typography: {
+    fontFamily: "Open Sans",
+    h1: {
+      fontFamily: "Alegreya Sans",
+      fontSize: "4em",
+      textAlign: "center",
+    },
+    h2: {
+      fontSize: "3em",
+      paddingTop: "0",
+      fontFamily: "Arimo",
+      fontWeight: "600",
+    },
+    h3: {
+      fontSize: "2em",
+      fontFamily: "Arimo",
+      fontWeight: "400",
+    },
+    h4: {
+      fontFamily: "Arimo",
+      textAlign: "center",
+    },
+    h5: {
+      fontFamily: "Space Mono",
+      fontSize: "2em",
+    },
+    caption: {
+      fontFamily: "Arimo",
+    },
+  },
   palette: {
     mode: "light",
-    // primary: {
-    //   main: "#F5F5F5",
-    // },
-    // background: {
-    //   basic: "#1e1e1e",
-    //   hero: "#091d2c",
-    //   heroGradient: "#113655",
-    //   about: "#293c51",
-    //   aboutGradient: "#37506D",
-    //   experience: "#2a092c",
-    //   experienceGradient: "#511155",
-    //   projects: "#5b0b1a",
-    //   projectsGradient: "#7F1024",
-    //   contact: "#002223",
-    //   contactGradient: "",
-    //   navbar: "#091d2c",
-    // },
+    primary: {
+      main: "#42a5f5",
+      contrastText: "#e3f2fd",
+    },
+    background: {
+      basic: "#42a5f5",
+      hero: "#CBC0D3",
+      heroGradient: "#CBC0D3",
+      about: "#8E9AAF",
+      aboutGradient: "#8E9AAF",
+      experience: "#DEE2FF",
+      experienceGradient: "#DEE2FF",
+      projects: "#EFD3D7",
+      projectsGradient: "#EFD3D7",
+      contact: "#D6FEFF",
+      contactGradient: "#D6FEFF",
+      navbar: "#030B11",
+    },
   },
 });

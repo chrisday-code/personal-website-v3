@@ -59,7 +59,7 @@ export const FillText = (props: FillTextProps) => {
       style={{
         cursor: "pointer",
         WebkitTextFillColor: value ? props.textColor : "rgb(0, 0, 0, 0)",
-        WebkitTextStrokeWidth: value ? "0" : "0.1rem",
+        WebkitTextStrokeWidth: value ? "0" : "0.08rem",
       }}
     >
       {props.text}

@@ -23,8 +23,8 @@ import { Skill, SkillIcon } from "../components/Skill";
 import { FillText } from "./mini-components/FillText";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
-const skillHeight = "40px";
-const skillWidth = "40px";
+const skillHeight = "50px";
+const skillWidth = "50px";
 
 const skills: Skill[] = [
   {
@@ -120,6 +120,7 @@ export const About = (props: any) => {
   const headingRef = useRef(null);
   const headingIsInView = useInView(headingRef);
 
+  //maybe instead of filtering the skills I just make them invisible
   useEffect(() => {
     if (filter.length === 0) {
       setFilteredSkills(baseSkills);
@@ -172,80 +173,78 @@ export const About = (props: any) => {
   return (
     <Element id="About" name="About">
       <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        gap="4em"
         sx={{
-          minHeight: "105vh",
-          paddingBottom: "5vh",
+          display: "flex",
+          minHeight: "100vh",
+          flexDirection: "column",
+          alignItems: "center",
           paddingTop: "10vh",
-          paddingLeft: "5vw",
-          paddingRight: "5vw",
+          paddingLeft: "10vw",
+          paddingRight: "10vw",
           backgroundImage: `linear-gradient(to top, ${theme.palette.background.about}, ${theme.palette.background.aboutGradient})`,
         }}
-        bgcolor={theme.palette.background.about}
       >
-        {/* <Grid item xs={12}> */}
-        <Typography
-          variant="h1"
-          ref={headingRef}
-          style={{
-            transform: headingIsInView ? "none" : "translateX(-400px)",
-            opacity: headingIsInView ? 1 : 0,
-            filter: headingIsInView ? "blur(0)" : "blur(5px)",
-            transition: "1s",
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="space-around"
+          gap="1em"
+          sx={{
+            maxWidth: "1500px",
+            height: "100%",
           }}
         >
-          About Me
-        </Typography>
-        {/* </Grid> */}
-        <Grid
-          container
-          columnSpacing={{ xs: 0, md: 6 }}
-          rowSpacing={{ xs: 6, md: 0 }}
-        >
-          <Grid item xs={12} md={6}>
-            <Typography variant="h3" fontSize="2.3rem">
-              Hi, I'm Chris. I'm a developer with{" "}
-              <FillText
-                textColor={theme.palette.background.hero}
-                text="front"
-                type="FE"
-                change={changeFilter}
-              />{" "}
-              &{" "}
-              <FillText
-                textColor={theme.palette.background.hero}
-                text="back"
-                type="BE"
-                change={changeFilter}
-              />{" "}
-              end experience, as well as a variety of development{" "}
-              <FillText
-                textColor={theme.palette.background.hero}
-                text="tools"
-                type="Dev"
-                change={changeFilter}
-              />
-            </Typography>
-            {/* <Typography variant="body1">
-              I have a BEng in Computer & Electrical Engineering from the
-              University of Queensland 🇦🇺
-            </Typography>
-            <Typography variant="body1">
-              My main focus these days is making beautiful, functional websites
-            </Typography> */}
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            md={6}
-            // sx={{
-            //   flexGrow: "2",
-            // }}
+          <Typography
+            variant="h1"
+            sx={{ marginBottom: { xs: "3vh", md: "10vh" } }}
+            ref={headingRef}
           >
-            <Typography
+            About Me
+          </Typography>
+          <Grid container>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
+                Hi, I'm Chris. I'm a developer with{" "}
+                <FillText
+                  textColor={theme.palette.primary.contrastText}
+                  text="front"
+                  type="FE"
+                  change={changeFilter}
+                />{" "}
+                &{" "}
+                <FillText
+                  textColor={theme.palette.primary.contrastText}
+                  text="back"
+                  type="BE"
+                  change={changeFilter}
+                />{" "}
+                end experience, as well as a variety of development{" "}
+                <FillText
+                  textColor={theme.palette.primary.contrastText}
+                  text="tools"
+                  type="Dev"
+                  change={changeFilter}
+                />
+              </Typography>
+              <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
+                I have a BEng in Computer & Electrical Engineering from the
+                University of Queensland 🇦🇺
+              </Typography>
+              <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
+                My main focus these days is making beautiful, functional
+                websites
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              // sx={{
+              //   flexGrow: "2",
+              // }}
+            >
+              {/* <Typography
               variant="h2"
               sx={{ textAlign: "center", marginBottom: "30px" }}
               onClick={() => {
@@ -256,13 +255,14 @@ export const About = (props: any) => {
               }}
             >
               Skills
-            </Typography>
-            {/* {testPopLayout()} */}
-            <Grid component={motion.div} layout container spacing={2}>
-              {renderSkills(filteredSkills)}
+            </Typography> */}
+              {/* {testPopLayout()} */}
+              <Grid component={motion.div} layout container spacing={2}>
+                {renderSkills(filteredSkills)}
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </Box>
     </Element>
   );

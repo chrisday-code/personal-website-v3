@@ -10,14 +10,14 @@ export const Footer = (props: any) => {
   return (
     <Box
       sx={{
-        minHeight: "10vh",
-        paddingTop: "4svh",
+        minHeight: "5vh",
+        // paddingTop: "3vh",
         paddingLeft: "5vw",
         paddingRight: "5vw",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "flex-start",
+        justifyContent: "center",
       }}
       bgcolor={theme.palette.background.paper}
     >

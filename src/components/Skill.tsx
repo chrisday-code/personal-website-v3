@@ -25,6 +25,7 @@ export const SkillIcon = forwardRef(
         layout
         transition={{ type: "spring", duration: 0.4 }}
         ref={ref}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         <IconContext.Provider value={{ size: size }}>
           {Icon}

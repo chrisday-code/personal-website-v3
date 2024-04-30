@@ -7,7 +7,7 @@ import { Iconbar } from "./Iconbar";
 import { FormControl, TextField, Button } from "@mui/material";
 import { FloatingButton } from "../styled-components/floating-button";
 import { ShadowButton } from "../styled-components/floating-button";
-// import { useState } from "react";
+import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { useForm, Controller } from "react-hook-form";
 
@@ -21,6 +21,7 @@ interface FormData {
 export const Contact = (props: any) => {
   const form = useRef<HTMLFormElement>(null);
 
+  const [formSuccess, setFormSuccess] = useState(false);
   const sendEmail = () => {
     if (form.current) {
       emailjs
@@ -52,7 +53,6 @@ export const Contact = (props: any) => {
     <Element id="Contact" name="Contact">
       <Box
         sx={{
-          minHeight: "95vh",
           paddingBottom: "5vh",
           paddingTop: "5vh",
           paddingLeft: "5vw",
@@ -60,27 +60,31 @@ export const Contact = (props: any) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-around",
+          justifyContent: "space-between",
           backgroundImage: `linear-gradient(to top, ${theme.palette.background.contact}, ${theme.palette.background.contactGradient})`,
         }}
         bgcolor={theme.palette.background.contact}
       >
-        <Typography variant="h2">Contact</Typography>
-        <Typography variant="body1">
-          Send me an email at chrisday046@gmail.com or fill in this form and
-          allow me to do it for you
+        <Typography variant="h1" sx={{ marginBottom: "3vh" }}>
+          Contact
         </Typography>
+        {/* TODO  add a link to the email that opens an email window */}
+
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            // alignItems: "center",
-            maxWidth: "900px",
-            padding: "5%",
+            maxWidth: "700px",
+            padding: "0% 2% 2% 2%",
             width: "100%",
-            // height: "50vh",
           }}
         >
+          <Typography
+            variant="h6"
+            sx={{ textAlign: "center", marginBottom: "2%" }}
+          >
+            Send me an email or contact me below
+          </Typography>
           <form
             onSubmit={handleSubmit((data) => {
               sendEmail();
@@ -177,25 +181,35 @@ export const Contact = (props: any) => {
                 />
               )}
             />
-            <FloatingButton
+            <Button
+              type="submit"
               color="primary"
               variant="round"
               sx={{
                 width: "50%",
                 alignSelf: "center",
                 marginTop: "2em",
-                opacity: 1,
+                // opacity: 0,
               }}
             >
               Submit
-            </FloatingButton>
-            <ShadowButton></ShadowButton>
+            </Button>
           </form>
         </Box>
-        <Typography variant="body1" sx={{ padding: "3%" }}>
-          Find me online at
-        </Typography>
-        <Iconbar />
+
+        <Box
+          sx={{
+            display: "flex",
+            justifySelf: "flex-end",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h6" sx={{ padding: "3%" }}>
+            Find me online at
+          </Typography>
+          <Iconbar />
+        </Box>
       </Box>
     </Element>
   );

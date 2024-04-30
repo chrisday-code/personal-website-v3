@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SVGProps } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import anime from "animejs/lib/anime.es.js";
 
 // TODO import theme to this guy
@@ -10,7 +10,66 @@ import anime from "animejs/lib/anime.es.js";
 
 // TODO maximise the images
 export const Laptop = (props: SVGProps<SVGSVGElement>) => {
+  const initialized = useRef(false);
   useEffect(() => {
+    if (initialized.current) {
+      return;
+    }
+    initialized.current = true;
+    //order matters for these, so define them first then do completes after
+    const RS4 = anime({
+      targets: "#right-side-scrollable",
+      autoplay: false,
+      translateY: [-90, 0],
+      easing: "linear",
+      direction: "normal",
+      delay: 1000,
+      duration: 1000,
+    });
+
+    const RS3 = anime({
+      targets: "#right-side-scrollable",
+      translateY: [-40, -90],
+      autoplay: false,
+      easing: "linear",
+      direction: "normal",
+      delay: 1000,
+      duration: 3000,
+    });
+
+    const RS2 = anime({
+      targets: "#right-side-scrollable",
+      autoplay: false,
+      translateY: [-20, -40],
+      easing: "linear",
+      direction: "normal",
+      delay: 1000,
+      duration: 1000,
+    });
+
+    const RS1 = anime({
+      targets: "#right-side-scrollable",
+      autoplay: false,
+      translateY: [0, -20],
+      easing: "linear",
+      direction: "normal",
+      delay: 1000,
+      duration: 1000,
+    });
+
+    RS1.complete = function () {
+      RS2.play();
+    };
+    RS2.complete = function () {
+      RS3.play();
+    };
+    RS3.complete = function () {
+      RS4.play();
+    };
+    RS4.complete = function () {
+      RS1.play();
+    };
+
     anime({
       targets: "#tab-name_2",
       x2: 26,
@@ -18,20 +77,41 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
       easing: "easeInOutQuad",
       duration: 1500,
     });
+    for (let i = 1; i <= 6; i++) {
+      anime({
+        targets: `#code line:nth-child(${i})`, // Select the i-th line
+        x2: [76, 126],
+        easing: "easeInOutSine",
+        duration: 1000,
+        delay: 1000 * i,
+      });
+    }
     anime({
-      targets: "#code line",
-      x2: [76, 126], // Expand the lines out to x-coordinate 200
-      // width: "100%",
-      easing: "easeInOutSine",
-      duration: 1000,
-      delay: anime.stagger(1000), // Add a stagger effect for each line
+      targets: `#code line:nth-child(7)`, // Select the i-th line
+      opacity: [0, 1],
+      easing: "linear",
+      direction: "alternate",
+      duration: 300,
+      delay: 7000,
+      loop: false,
+      complete: function () {
+        anime({
+          targets: `#code line:nth-child(7)`, // Select the i-th line
+          opacity: [0, 1],
+          easing: "linear",
+          duration: 300,
+          loop: true,
+          direction: "alternate",
+          delay: 300,
+        });
+      },
     });
+    //file browser in vscode
     anime({
       targets: "#files line",
-      x2: [55, 66], // Expand the lines out to x-coordinate 200
+      x2: [55, 66],
       easing: "easeInOutSine",
       duration: 1000,
-      // delay: anime.stagger(1000), // Add a stagger effect for each line
     });
     anime({
       targets: "#d-screen-left",
@@ -63,6 +143,10 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
           element.style.transformOrigin = "bottom left";
         }
       },
+      complete: function () {
+        // rightScrollAnimation.play();
+        RS1.play();
+      },
     });
   }, []);
 
@@ -74,6 +158,17 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
       style={{ maxHeight: "500px" }}
       xmlns="http://www.w3.org/2000/svg"
     >
+      <defs>
+        <clipPath id="desktop-screen-clip">
+          <rect x="2" y="2" width="208" height="86"></rect>
+        </clipPath>
+        <clipPath id="right-side-scroll-clip">
+          <rect x="120" y="19" width="87" height="70" />
+        </clipPath>
+        <clipPath id="right-chrome-tab-clip-path">
+          <rect x="106" y="3" width="102" height="83" rx="4" />
+        </clipPath>
+      </defs>
       <rect width="215" height="193" />
       <g id="Frame 1">
         <rect width="215" height="193" />
@@ -101,7 +196,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
             height="11"
             fill="#777474"
           />
-          <g id="desktop-screen">
+          <g id="desktop-screen" clipPath="url(#desktop-screen-clip)">
             <rect
               id="desktop-screen-background"
               x="2"
@@ -110,9 +205,9 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
               height="86"
               fill="#252525"
             />
-            <g id="d-screen-right">
+            <g id="d-screen-right" clipPath="url(#right-chrome-tab-clip-path)">
               <rect
-                id="left-chrome-tab"
+                id="right-chrome-tab"
                 x="106"
                 y="3"
                 width="102"
@@ -166,8 +261,8 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                 x="106"
                 y="57"
                 width="102"
-                height="29"
-                rx="4"
+                height="132"
+                rx="0"
                 fill="white"
               />
               <rect
@@ -187,7 +282,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                 height="6.1"
                 fill="white"
                 stroke="black"
-                stroke-width="0.1"
+                strokeWidth="0.1"
               />
               <rect
                 id="stack-logo"
@@ -206,269 +301,729 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                 rx="0.45"
                 fill="white"
                 stroke="black"
-                stroke-width="0.1"
+                strokeWidth="0.1"
               />
-              <g id="question links">
-                <rect
-                  id="question-links"
-                  x="186"
-                  y="60"
-                  width="20"
-                  height="22"
-                  fill="#D9D9D9"
-                />
-                <path id="issue 1" d="M188 62H192V64H188V62Z" fill="#16874C" />
-                <path id="issue 2" d="M188 66H192V68H188V66Z" fill="#16874C" />
-                <path id="issue 5" d="M188 78H192V80H188V78Z" fill="#16874C" />
-                <path id="issue 4" d="M188 74H192V76H188V74Z" fill="#16874C" />
-                <path id="issue 3" d="M188 70H192V72H188V70Z" fill="#16874C" />
-                <path id="link 1" d="M193 63H203" stroke="#1B75D0" />
-                <path id="link 2" d="M193 67H203" stroke="#1B75D0" />
-                <path id="link 3" d="M193 71H203" stroke="#1B75D0" />
-                <path id="link 4" d="M193 75H203" stroke="#1B75D0" />
-                <path id="link 5" d="M193 79H203" stroke="#1B75D0" />
+              <g
+                id="right-side-scroll-forced-clip"
+                clipPath="url(#right-side-scroll-clip)"
+              >
+                <g id="right-side-scrollable">
+                  <g id="network-links">
+                    <rect
+                      id="Links box"
+                      x="186"
+                      y="91"
+                      width="20"
+                      height="38"
+                      fill="#D9D9D9"
+                    />
+                    <line
+                      id="links heading"
+                      x1="187"
+                      y1="87.5"
+                      x2="205"
+                      y2="87.5"
+                      stroke="black"
+                    />
+                    <path
+                      id="Links"
+                      d="M189 96H203M189 102H203M189 99H203M189 105H203M189 108H203M189 111H203M189 114H203M189 117H203M189 120H203M189 123H203M189 126H203M189 92.75H203"
+                      stroke="#1B75D0"
+                      strokeWidth="0.5"
+                    />
+                  </g>
+                  <g id="question links">
+                    <rect
+                      id="question-links"
+                      x="186"
+                      y="60"
+                      width="20"
+                      height="22"
+                      fill="#D9D9D9"
+                    />
+                    <path
+                      id="issue 1"
+                      d="M188 62H192V64H188V62Z"
+                      fill="#16874C"
+                    />
+                    <path
+                      id="issue 2"
+                      d="M188 66H192V68H188V66Z"
+                      fill="#16874C"
+                    />
+                    <path
+                      id="issue 5"
+                      d="M188 78H192V80H188V78Z"
+                      fill="#16874C"
+                    />
+                    <path
+                      id="issue 4"
+                      d="M188 74H192V76H188V74Z"
+                      fill="#16874C"
+                    />
+                    <path
+                      id="issue 3"
+                      d="M188 70H192V72H188V70Z"
+                      fill="#16874C"
+                    />
+                    <path id="link 1" d="M193 63H203" stroke="#1B75D0" />
+                    <path id="link 2" d="M193 67H203" stroke="#1B75D0" />
+                    <path id="link 3" d="M193 71H203" stroke="#1B75D0" />
+                    <path id="link 4" d="M193 75H203" stroke="#1B75D0" />
+                    <path id="link 5" d="M193 79H203" stroke="#1B75D0" />
+                  </g>
+                  <g id="answer-4">
+                    <g id="a4-upvote">
+                      <circle
+                        id="a4-upvote-circle"
+                        cx="129"
+                        cy="141"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="a4-upvote-triangle"
+                        d="M129 140L129.866 141.5H128.134L129 140Z"
+                        fill="black"
+                      />
+                    </g>
+                    <g id="a4-downvote">
+                      <circle
+                        id="a4-downvote-circle"
+                        cx="129"
+                        cy="146"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="a4-downvote-triangle"
+                        d="M129 147L128.134 145.5H129.866L129 147Z"
+                        fill="black"
+                      />
+                    </g>
+                    <rect
+                      id="a4-answer-code"
+                      x="134"
+                      y="139"
+                      width="50"
+                      height="14"
+                      fill="#D9D9D9"
+                    />
+                    <path
+                      id="a4-inner-tag-close"
+                      d="M140 147H163.5"
+                      stroke="#63A9E9"
+                    />
+                    <line
+                      id="a4-answer-text"
+                      x1="134"
+                      y1="136.5"
+                      x2="159"
+                      y2="136.5"
+                      stroke="black"
+                    />
+                    <g id="a4-outer-tag-close">
+                      <line
+                        x1="136"
+                        y1="149.5"
+                        x2="140"
+                        y2="149.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="149.5"
+                        x2="140"
+                        y2="149.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="149.5"
+                        x2="140"
+                        y2="149.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <g id="a4-outer-tag-open">
+                      <line
+                        x1="136"
+                        y1="141.5"
+                        x2="140"
+                        y2="141.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="141.5"
+                        x2="140"
+                        y2="141.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="141.5"
+                        x2="140"
+                        y2="141.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <path
+                      id="a4-inner-tag-open"
+                      d="M140 142.5H168"
+                      stroke="#63A9E9"
+                    />
+                    <path
+                      id="a4-inner-tag-close_2"
+                      d="M140 145H148"
+                      stroke="#63A9E9"
+                    />
+                    <rect
+                      id="a4-answer-code_2"
+                      x="134"
+                      y="162"
+                      width="50"
+                      height="14"
+                      fill="#D9D9D9"
+                    />
+                    <path
+                      id="a4-inner-tag-close_3"
+                      d="M140 170H148"
+                      stroke="#63A9E9"
+                    />
+                    <g id="a4-outer-tag-close_2">
+                      <line
+                        x1="136"
+                        y1="172.5"
+                        x2="140"
+                        y2="172.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="172.5"
+                        x2="140"
+                        y2="172.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="172.5"
+                        x2="140"
+                        y2="172.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <g id="a4-outer-tag-open_2">
+                      <line
+                        x1="136"
+                        y1="164.5"
+                        x2="140"
+                        y2="164.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="164.5"
+                        x2="140"
+                        y2="164.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="164.5"
+                        x2="140"
+                        y2="164.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <path
+                      id="a4-inner-tag-open_2"
+                      d="M140 165.5H173"
+                      stroke="#63A9E9"
+                    />
+                    <path
+                      id="a4-inner-tag-close_4"
+                      d="M140 168H148"
+                      stroke="#63A9E9"
+                    />
+                    <line
+                      id="a4-text-2"
+                      x1="134"
+                      y1="159.75"
+                      x2="160"
+                      y2="159.75"
+                      stroke="#626060"
+                      strokeWidth="0.5"
+                    />
+                    <line
+                      id="a4-text"
+                      x1="134"
+                      y1="155.75"
+                      x2="160"
+                      y2="155.75"
+                      stroke="#626060"
+                      strokeWidth="0.5"
+                    />
+                  </g>
+                  <g id="answer-3">
+                    <g id="a3-upvote">
+                      <circle
+                        id="a3-upvote-circle"
+                        cx="129"
+                        cy="119"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="a3-upvote-triangle"
+                        d="M129 118L129.866 119.5H128.134L129 118Z"
+                        fill="black"
+                      />
+                    </g>
+                    <g id="a3-downvote">
+                      <circle
+                        id="a3-downvote-circle"
+                        cx="129"
+                        cy="124"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="a3-downvote-triangle"
+                        d="M129 125L128.134 123.5H129.866L129 125Z"
+                        fill="black"
+                      />
+                    </g>
+                    <rect
+                      id="a3-answer-code"
+                      x="134"
+                      y="117"
+                      width="50"
+                      height="10"
+                      fill="#D9D9D9"
+                    />
+                    <line
+                      id="a3-answer-text"
+                      x1="134"
+                      y1="114.5"
+                      x2="159"
+                      y2="114.5"
+                      stroke="black"
+                    />
+                    <g id="a3-outer-tag-close">
+                      <line
+                        x1="136"
+                        y1="124.5"
+                        x2="140"
+                        y2="124.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="124.5"
+                        x2="140"
+                        y2="124.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="124.5"
+                        x2="140"
+                        y2="124.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <g id="a3-outer-tag-open">
+                      <line
+                        x1="136"
+                        y1="119.5"
+                        x2="140"
+                        y2="119.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="119.5"
+                        x2="140"
+                        y2="119.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="119.5"
+                        x2="140"
+                        y2="119.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <path
+                      id="a3-inner-tag-open"
+                      d="M140 120.5H153.5"
+                      stroke="#63A9E9"
+                    />
+                    <path
+                      id="a3-inner-tag-close"
+                      d="M140 122H148"
+                      stroke="#63A9E9"
+                    />
+                  </g>
+                  <g id="answer-2">
+                    <g id="a2-upvote">
+                      <circle
+                        id="a2-upvote-circle"
+                        cx="129"
+                        cy="91"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="a2-upvote-triangle"
+                        d="M129 90L129.866 91.5H128.134L129 90Z"
+                        fill="black"
+                      />
+                    </g>
+                    <g id="a2-downvote">
+                      <circle
+                        id="a2-downvote-circle"
+                        cx="129"
+                        cy="96"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="a2-downvote-triangle"
+                        d="M129 97L128.134 95.5H129.866L129 97Z"
+                        fill="black"
+                      />
+                    </g>
+                    <rect
+                      id="a2-answer-code"
+                      x="134"
+                      y="89"
+                      width="50"
+                      height="15"
+                      fill="#D9D9D9"
+                    />
+                    <path
+                      id="a2-inner-34"
+                      d="M140 98H148M140 96H159"
+                      stroke="#63A9E9"
+                    />
+                    <line
+                      id="a2-answer-text"
+                      x1="134"
+                      y1="86.5"
+                      x2="159"
+                      y2="86.5"
+                      stroke="black"
+                    />
+                    <g id="a2-outer-tag-close">
+                      <line
+                        x1="136"
+                        y1="101.5"
+                        x2="140"
+                        y2="101.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="101.5"
+                        x2="140"
+                        y2="101.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="101.5"
+                        x2="140"
+                        y2="101.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <g id="a2-outer-tag-open">
+                      <line
+                        x1="136"
+                        y1="91.5"
+                        x2="140"
+                        y2="91.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="91.5"
+                        x2="140"
+                        y2="91.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="91.5"
+                        x2="140"
+                        y2="91.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <path
+                      id="a2-inner-1"
+                      d="M140 92.5H153.5"
+                      stroke="#63A9E9"
+                    />
+                    <path id="a2-inner-2" d="M140 94H148" stroke="#63A9E9" />
+                    <path id="a2-inner-5" d="M140 100H148" stroke="#63A9E9" />
+                  </g>
+                  <g id="answer-1">
+                    <g id="upvote">
+                      <circle
+                        id="upvote-circle"
+                        cx="129"
+                        cy="64"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="upvote-triangle"
+                        d="M129 63L129.866 64.5H128.134L129 63Z"
+                        fill="black"
+                      />
+                    </g>
+                    <g id="downvote">
+                      <circle
+                        id="downvote-circle"
+                        cx="129"
+                        cy="69"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="downvote-triangle"
+                        d="M129 70L128.134 68.5H129.866L129 70Z"
+                        fill="black"
+                      />
+                    </g>
+                    <rect
+                      id="answer-code"
+                      x="134"
+                      y="62"
+                      width="50"
+                      height="10"
+                      fill="#D9D9D9"
+                    />
+                    <line
+                      id="answer-text"
+                      x1="134"
+                      y1="59.5"
+                      x2="159"
+                      y2="59.5"
+                      stroke="black"
+                    />
+                    <g id="outer-tag-close">
+                      <line
+                        x1="136"
+                        y1="69.5"
+                        x2="140"
+                        y2="69.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="69.5"
+                        x2="140"
+                        y2="69.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="69.5"
+                        x2="140"
+                        y2="69.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <g id="outer-tag-open">
+                      <line
+                        x1="136"
+                        y1="64.5"
+                        x2="140"
+                        y2="64.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="64.5"
+                        x2="140"
+                        y2="64.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="64.5"
+                        x2="140"
+                        y2="64.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <path
+                      id="inner-tag-open"
+                      d="M140 65.5H153.5"
+                      stroke="#63A9E9"
+                    />
+                    <path
+                      id="inner-tag-close"
+                      d="M140 67H148"
+                      stroke="#63A9E9"
+                    />
+                    <path
+                      id="tick"
+                      d="M127.5 73.5L129 75L132 72"
+                      stroke="#16874C"
+                    />
+                  </g>
+                  <g id="question">
+                    <g id="upvote_2">
+                      <circle
+                        id="upvote-circle_2"
+                        cx="129"
+                        cy="30"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="upvote-triangle_2"
+                        d="M129 29L129.866 30.5H128.134L129 29Z"
+                        fill="black"
+                      />
+                    </g>
+                    <g id="downvote_2">
+                      <circle
+                        id="downvote-circle_2"
+                        cx="129"
+                        cy="35"
+                        r="2"
+                        fill="#D9D9D9"
+                      />
+                      <path
+                        id="downvote-triangle_2"
+                        d="M129 36L128.134 34.5H129.866L129 36Z"
+                        fill="black"
+                      />
+                    </g>
+                    <rect
+                      id="question-code"
+                      x="134"
+                      y="28"
+                      width="50"
+                      height="10"
+                      fill="#D9D9D9"
+                    />
+                    <line
+                      id="question-text"
+                      x1="134"
+                      y1="25.5"
+                      x2="179"
+                      y2="25.5"
+                      stroke="black"
+                    />
+                    <g id="outer-tag-close_2">
+                      <line
+                        x1="136"
+                        y1="35.5"
+                        x2="140"
+                        y2="35.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="35.5"
+                        x2="140"
+                        y2="35.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="35.5"
+                        x2="140"
+                        y2="35.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <g id="outer-tag-open_2">
+                      <line
+                        x1="136"
+                        y1="30.5"
+                        x2="140"
+                        y2="30.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="30.5"
+                        x2="140"
+                        y2="30.5"
+                        stroke="#C72C2C"
+                      />
+                      <line
+                        x1="136"
+                        y1="30.5"
+                        x2="140"
+                        y2="30.5"
+                        stroke="#C72C2C"
+                      />
+                    </g>
+                    <path
+                      id="inner-tag-open_2"
+                      d="M140 31.5H153.5"
+                      stroke="#63A9E9"
+                    />
+                    <path
+                      id="inner-tag-close_2"
+                      d="M140 33H148"
+                      stroke="#63A9E9"
+                    />
+                    <rect
+                      id="questioner"
+                      x="168"
+                      y="41"
+                      width="16"
+                      height="4"
+                      fill="#EDF5FD"
+                    />
+                    <path
+                      id="question-header"
+                      d="M132.5 21.5H155"
+                      stroke="#272828"
+                    />
+                    <rect
+                      id="ask-button"
+                      x="196"
+                      y="20"
+                      width="11"
+                      height="3"
+                      rx="0.5"
+                      fill="#1B76CF"
+                    />
+                  </g>
+                  <rect
+                    id="blog-links"
+                    x="187"
+                    y="24"
+                    width="20"
+                    height="20"
+                    fill="#FBEBC7"
+                  />
+                </g>
               </g>
-              <g id="answer">
-                <g id="upvote">
-                  <circle
-                    id="upvote-circle"
-                    cx="129"
-                    cy="64"
-                    r="2"
-                    fill="#D9D9D9"
-                  />
-                  <path
-                    id="upvote-triangle"
-                    d="M129 63L129.866 64.5H128.134L129 63Z"
-                    fill="black"
-                  />
-                </g>
-                <g id="downvote">
-                  <circle
-                    id="downvote-circle"
-                    cx="129"
-                    cy="69"
-                    r="2"
-                    fill="#D9D9D9"
-                  />
-                  <path
-                    id="downvote-triangle"
-                    d="M129 70L128.134 68.5H129.866L129 70Z"
-                    fill="black"
-                  />
-                </g>
-                <rect
-                  id="answer-code"
-                  x="134"
-                  y="62"
-                  width="50"
-                  height="10"
-                  fill="#D9D9D9"
-                />
-                <line
-                  id="answer-text"
-                  x1="134"
-                  y1="59.5"
-                  x2="159"
-                  y2="59.5"
-                  stroke="black"
-                />
-                <g id="outer-tag-close">
-                  <line
-                    x1="136"
-                    y1="69.5"
-                    x2="140"
-                    y2="69.5"
-                    stroke="#C72C2C"
-                  />
-                  <line
-                    x1="136"
-                    y1="69.5"
-                    x2="140"
-                    y2="69.5"
-                    stroke="#C72C2C"
-                  />
-                  <line
-                    x1="136"
-                    y1="69.5"
-                    x2="140"
-                    y2="69.5"
-                    stroke="#C72C2C"
-                  />
-                </g>
-                <g id="outer-tag-open">
-                  <line
-                    x1="136"
-                    y1="64.5"
-                    x2="140"
-                    y2="64.5"
-                    stroke="#C72C2C"
-                  />
-                  <line
-                    x1="136"
-                    y1="64.5"
-                    x2="140"
-                    y2="64.5"
-                    stroke="#C72C2C"
-                  />
-                  <line
-                    x1="136"
-                    y1="64.5"
-                    x2="140"
-                    y2="64.5"
-                    stroke="#C72C2C"
-                  />
-                </g>
-                <path
-                  id="inner-tag-open"
-                  d="M140 65.5H153.5"
-                  stroke="#63A9E9"
-                />
-                <path id="inner-tag-close" d="M140 67H148" stroke="#63A9E9" />
-                <path
-                  id="tick"
-                  d="M127.5 73.5L129 75L132 72"
-                  stroke="#16874C"
-                />
-              </g>
-              <g id="question">
-                <g id="upvote_2">
-                  <circle
-                    id="upvote-circle_2"
-                    cx="129"
-                    cy="30"
-                    r="2"
-                    fill="#D9D9D9"
-                  />
-                  <path
-                    id="upvote-triangle_2"
-                    d="M129 29L129.866 30.5H128.134L129 29Z"
-                    fill="black"
-                  />
-                </g>
-                <g id="downvote_2">
-                  <circle
-                    id="downvote-circle_2"
-                    cx="129"
-                    cy="35"
-                    r="2"
-                    fill="#D9D9D9"
-                  />
-                  <path
-                    id="downvote-triangle_2"
-                    d="M129 36L128.134 34.5H129.866L129 36Z"
-                    fill="black"
-                  />
-                </g>
-                <rect
-                  id="question-code"
-                  x="134"
-                  y="28"
-                  width="50"
-                  height="10"
-                  fill="#D9D9D9"
-                />
-                <line
-                  id="question-text"
-                  x1="134"
-                  y1="25.5"
-                  x2="179"
-                  y2="25.5"
-                  stroke="black"
-                />
-                <g id="outer-tag-close_2">
-                  <line
-                    x1="136"
-                    y1="35.5"
-                    x2="140"
-                    y2="35.5"
-                    stroke="#C72C2C"
-                  />
-                  <line
-                    x1="136"
-                    y1="35.5"
-                    x2="140"
-                    y2="35.5"
-                    stroke="#C72C2C"
-                  />
-                  <line
-                    x1="136"
-                    y1="35.5"
-                    x2="140"
-                    y2="35.5"
-                    stroke="#C72C2C"
-                  />
-                </g>
-                <g id="outer-tag-open_2">
-                  <line
-                    x1="136"
-                    y1="30.5"
-                    x2="140"
-                    y2="30.5"
-                    stroke="#C72C2C"
-                  />
-                  <line
-                    x1="136"
-                    y1="30.5"
-                    x2="140"
-                    y2="30.5"
-                    stroke="#C72C2C"
-                  />
-                  <line
-                    x1="136"
-                    y1="30.5"
-                    x2="140"
-                    y2="30.5"
-                    stroke="#C72C2C"
-                  />
-                </g>
-                <path
-                  id="inner-tag-open_2"
-                  d="M140 31.5H153.5"
-                  stroke="#63A9E9"
-                />
-                <path id="inner-tag-close_2" d="M140 33H148" stroke="#63A9E9" />
-                <rect
-                  id="questioner"
-                  x="168"
-                  y="41"
-                  width="16"
-                  height="4"
-                  fill="#EDF5FD"
-                />
-                <path
-                  id="question-header"
-                  d="M132.5 21.5H155"
-                  stroke="#272828"
-                />
-                <rect
-                  id="ask-button"
-                  x="196"
-                  y="20"
-                  width="11"
-                  height="3"
-                  rx="0.5"
-                  fill="#1B76CF"
-                />
-              </g>
-              <rect
-                id="blog-links"
-                x="187"
-                y="24"
-                width="20"
-                height="20"
-                fill="#FBEBC7"
-              />
+
               <g id="stack-sidebar">
                 <g id="stack-sidebar_2">
-                  <mask id="path-54-inside-1_0_1" fill="white">
-                    <path d="M109 18H122V86H109V18Z" />
+                  <mask id="path-121-inside-1_0_1" fill="white">
+                    <path d="M109 18H120V173H109V18Z" />
                   </mask>
-                  <path d="M109 18H122V86H109V18Z" fill="white" />
+                  <path d="M109 18H120V173H109V18Z" fill="white" />
                   <path
-                    d="M122 18H122.1V17.9H122V18ZM109 18.1H122V17.9H109V18.1ZM121.9 18V86H122.1V18H121.9Z"
+                    d="M120 18H120.1V17.9H120V18ZM109 18.1H120V17.9H109V18.1ZM119.9 18V173H120.1V18H119.9Z"
                     fill="black"
-                    mask="url(#path-54-inside-1_0_1)"
+                    mask="url(#path-121-inside-1_0_1)"
                   />
                 </g>
                 <path id="stack-nav-l-1" d="M109 22H119" stroke="#272828" />
@@ -664,7 +1219,6 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
               </g>
             </g>
           </g>
-          <path id="Rectangle 1" d="M195 67H199V69H195V67Z" fill="#16874C" />
         </g>
         <g id="laptop">
           <rect
@@ -773,6 +1327,14 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                 y1="149.5"
                 x2="126"
                 y2="149.5"
+                stroke="white"
+              />
+              <line
+                id="Code 7"
+                x1="76"
+                y1="155.5"
+                x2="80"
+                y2="155.5"
                 stroke="white"
               />
             </g>
