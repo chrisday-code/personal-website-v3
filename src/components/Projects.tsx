@@ -1,13 +1,7 @@
-import { Paper, Typography, Button } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { ReactComponent as Laptop } from "../images/icons/laptop.svg";
-import { ReactComponent as Moon } from "../images/icons/moon.svg";
-import { Iconbar } from "./Iconbar";
-import { FaGithub } from "react-icons/fa";
-import { FloatingButton } from "../styled-components/floating-button";
 import { Element } from "react-scroll";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import "../styles/carousel.css";
@@ -15,13 +9,10 @@ import "slick-carousel/slick/slick-theme.css";
 import PersonalWebsite from "../images/projects/personal-website.png";
 import MovieClub from "../images/projects/movie-club.png";
 import ChemistryHelper from "../images/projects/chemistry-helper.png";
-import { Skill, SkillIcon } from "../components/Skill";
+import { Skill } from "../components/Skill";
 import { ReactComponent as JavascriptIcon } from "../images/icons/javascript-icon.svg";
-import { ReactComponent as NodeJsIcon } from "../images/icons/nodejs-icon.svg";
-import { ReactComponent as PostgreSQLIcon } from "../images/icons/postgresql-icon.svg";
 import { ReactComponent as ReactIcon } from "../images/icons/react-icon.svg";
 import { ReactComponent as TypescriptIcon } from "../images/icons/typescript-icon.svg";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import { ProjectTile } from "./ProjectTile";
 
 interface ProjectType {
@@ -115,25 +106,10 @@ export const Projects = (props: any) => {
     },
   ];
 
-  const renderSkills = (skills: Skill[]) => {
-    return skills.map(({ name, Icon, size }: Skill, index) => {
-      // return <div key={index}>{name}</div>;
-      return <SkillIcon key={index} name={""} size={size} Icon={Icon} />;
-    });
-  };
-
   const renderProjects = (projects: ProjectType[]) => {
     return projects.map((project: ProjectType, index) => {
       return <ProjectTile key={index} {...project} />;
     });
-  };
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
   };
 
   return (

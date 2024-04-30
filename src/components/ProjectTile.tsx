@@ -1,5 +1,5 @@
-import { Box, Typography, Button, Chip, IconButton } from "@mui/material";
-import { Skill, SkillIcon } from "../components/Skill";
+import { Box, Typography, Chip, IconButton } from "@mui/material";
+import { Skill } from "../components/Skill";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { FaGithub } from "react-icons/fa";
@@ -28,6 +28,7 @@ export const ProjectTile = (project: ProjectType) => {
     });
   };
   const [hovered, setHovered] = useState(false);
+  // eslint-disable-next-line
   const theme = useTheme();
 
   return (

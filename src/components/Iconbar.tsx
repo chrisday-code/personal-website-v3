@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
@@ -42,7 +41,6 @@ export const Iconlink = ({ highlightColor, link, Icon }: Icon) => {
 };
 
 export const Iconbar = (props: any) => {
-  const theme = useTheme();
   const icons: Icon[] = [
     {
       highlightColor: "#4cba18",

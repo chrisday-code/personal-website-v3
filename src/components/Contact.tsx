@@ -4,9 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import { Element } from "react-scroll";
 import { useRef } from "react";
 import { Iconbar } from "./Iconbar";
-import { FormControl, TextField, Button } from "@mui/material";
-import { FloatingButton } from "../styled-components/floating-button";
-import { ShadowButton } from "../styled-components/floating-button";
+import { TextField, Button } from "@mui/material";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { useForm, Controller } from "react-hook-form";
@@ -22,6 +20,7 @@ export const Contact = (props: any) => {
   const form = useRef<HTMLFormElement>(null);
 
   const [formSuccess, setFormSuccess] = useState(false);
+
   const sendEmail = () => {
     if (form.current) {
       emailjs
@@ -34,6 +33,8 @@ export const Contact = (props: any) => {
         .then(
           (result) => {
             console.log(result.text);
+            setFormSuccess(true);
+            console.log(formSuccess);
           },
           (error) => {
             console.log(error.text);

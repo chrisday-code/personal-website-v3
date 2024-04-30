@@ -2,24 +2,19 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { LightDarkSwitch } from "../styled-components/light-dark-switch";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IconContext } from "react-icons";
 import {
   AppBar,
   Toolbar,
   IconButton,
-  Button,
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Divider from "@mui/material/Divider";
 import SwipeableDrawer from "@mui/material/Drawer";
 import { useState, useEffect, useRef } from "react";
 import { Link as ScrollLink } from "react-scroll";
-import { Logo } from "../images/svg-animations/Logo/Logo";
 
 interface NavbarProps {
   toggleTheme: () => void; // Define the type of the onData prop
@@ -117,17 +112,12 @@ export const Navbar = ({ toggleTheme }: NavbarProps) => {
     </Box>
   );
 
-  //wow
   const [logoHovered, setLogoHovered] = useState(false);
   const [logo, setLogo] = useState("CHRIS");
-  const [count, setCount] = useState(0);
   const firstRef = useRef(false);
-  //do the effect in here remember it runs twice lol
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  //print something every second
-  // const interval = useRef<number | null>(null);
 
-  const [running, setRunning] = useState(false);
+  // const [running, setRunning] = useState(false);
   useEffect(() => {
     let iteration = 0;
     // console.log("hovered: ", logoHovered);
@@ -155,8 +145,7 @@ export const Navbar = ({ toggleTheme }: NavbarProps) => {
 
       iteration += 1 / 3;
     }, 60);
-    // Cleanup function to clear the interval when the component unmounts or when dependencies change
-    return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [logoHovered]);
   //scroll items across this part
 

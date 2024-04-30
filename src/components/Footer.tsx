@@ -1,9 +1,6 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { ReactComponent as Laptop } from "../images/icons/laptop.svg";
-import { ReactComponent as Moon } from "../images/icons/moon.svg";
-import { Iconbar } from "./Iconbar";
 
 export const Footer = (props: any) => {
   const theme = useTheme();

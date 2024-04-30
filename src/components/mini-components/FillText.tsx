@@ -15,19 +15,16 @@ export const FillText = (props: FillTextProps) => {
 
   // function that calls the filter
 
-  const checkChanges = (myValue: boolean) => {
-    props.change(myValue, props.type);
-    setValue(myValue);
-  };
-
   useEffect(() => {
+    const checkChanges = (myValue: boolean) => {
+      props.change(myValue, props.type);
+      setValue(myValue);
+    };
     if (value) {
       if (clicked) {
-        // checkChanges(false);
         return;
       }
       if (hovered) {
-        // checkChanges(true);
         return;
       }
       checkChanges(false);
@@ -43,7 +40,7 @@ export const FillText = (props: FillTextProps) => {
         return;
       }
     }
-  }, [hovered, clicked]);
+  }, [hovered, clicked, value, props]);
 
   return (
     <span

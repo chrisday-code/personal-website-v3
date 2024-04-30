@@ -17,11 +17,10 @@ import { FaCogs } from "react-icons/fa";
 import { ReactComponent as SassIcon } from "../images/icons/sass-icon.svg";
 import { ReactComponent as AwsIcon } from "../images/icons/aws-icon.svg";
 import { ReactComponent as ConfluenceIcon } from "../images/icons/confluence-icon.svg";
-import { IconContext } from "react-icons";
 import { Element } from "react-scroll";
 import { Skill, SkillIcon } from "../components/Skill";
 import { FillText } from "./mini-components/FillText";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const skillHeight = "50px";
 const skillWidth = "50px";
@@ -109,16 +108,13 @@ const skills: Skill[] = [
 
 export const About = (props: any) => {
   const theme = useTheme();
-  const [baseSkills, setBaseSkills] = useState<Array<Skill>>(skills);
+  const [baseSkills] = useState<Array<Skill>>(skills);
   const [filteredSkills, setFilteredSkills] = useState<Array<Skill>>(skills);
   const [filter, setFilter] = useState<Array<string>>([]);
-  // const filter: string[] = [];
-  const [rerender, setRerender] = useState(false);
 
   const count = useRef(0);
 
   const headingRef = useRef(null);
-  const headingIsInView = useInView(headingRef);
 
   //maybe instead of filtering the skills I just make them invisible
   useEffect(() => {
@@ -138,7 +134,7 @@ export const About = (props: any) => {
       }
     }
     setFilteredSkills(newSkills);
-  }, [filter]);
+  }, [filter, baseSkills]);
 
   const changeFilter = (value: boolean, type: string) => {
     if (value) {
