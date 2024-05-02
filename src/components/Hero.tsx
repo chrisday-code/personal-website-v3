@@ -12,6 +12,7 @@ export const Hero = (props: any) => {
       <Box
         sx={{
           minHeight: "100vh",
+          height: "100%",
           paddingBottom: "10vh",
           paddingTop: "10vh",
           width: "100vw",
@@ -28,7 +29,7 @@ export const Hero = (props: any) => {
             width: "100vw",
             maxWidth: "1500px",
             alignItems: "center",
-            justifyContent: "space-between",
+            justifyContent: { xs: "center", lg: "space-between" },
           }}
         >
           <Box
@@ -39,7 +40,8 @@ export const Hero = (props: any) => {
               display: "flex",
               flexDirection: { xs: "column", lg: "row" },
               justifyContent: { xs: "center" },
-              gap: { xs: "10em", lg: "4em" },
+              alignItems: { xs: "", lg: "center" },
+              gap: { xs: "4em", lg: "4em" },
             }}
           >
             <Box
@@ -64,6 +66,7 @@ export const Hero = (props: any) => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
+                height: { xs: "50%", lg: "80%" },
               }}
             >
               <Laptop />

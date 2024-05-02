@@ -103,7 +103,9 @@ export const Navbar = ({ toggleTheme }: NavbarProps) => {
             offset={0}
             style={{ cursor: "pointer" }}
           >
-            Chris Day
+            <Typography variant="h5" sx={{ margin: "auto" }}>
+              Chris
+            </Typography>
           </ScrollLink>
         </Typography>
       </Box>

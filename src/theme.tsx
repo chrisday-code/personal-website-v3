@@ -7,6 +7,16 @@ import "@fontsource/space-mono";
 
 //typescript will see this and just add them in because its a thing of beauty
 // I'm going to change the theme options in here so I can set multiple backgrounds
+
+//shut up errors
+interface VsCodeColors {
+  codeBackground?: string;
+  codeText?: string;
+  fileBackground?: string;
+  fileText?: string;
+  inactiveTab?: string;
+}
+
 declare module "@mui/material/styles" {
   interface Theme {
     status: {
@@ -18,6 +28,14 @@ declare module "@mui/material/styles" {
     status?: {
       danger?: string;
     };
+  }
+
+  interface Palette {
+    vsCodeColors: VsCodeColors;
+  }
+
+  interface PaletteOptions {
+    vsCodeColors?: VsCodeColors;
   }
   //these are called as partials so you don't need to make them optional ( I think )
   interface TypeBackground {
@@ -98,7 +116,17 @@ export const darkTheme = createTheme({
     },
   },
   palette: {
+    vsCodeColors: {
+      codeBackground: "#423F3F",
+      codeText: "#FFFFFF",
+      fileBackground: "#302E2E",
+      fileText: "#BBB4B4",
+      inactiveTab: "#555151",
+    },
     mode: "dark",
+    text: {
+      primary: "#F5F5F5",
+    },
     primary: {
       main: "#F5F5F5",
       contrastText: "#c3012f",
@@ -177,23 +205,34 @@ export const lightTheme = createTheme({
   },
   palette: {
     mode: "light",
+    text: {
+      primary: "#000000",
+      secondary: "#08599B",
+    },
+    vsCodeColors: {
+      codeBackground: "#FFFFFF",
+      codeText: "#000000",
+      fileBackground: "#ecedef",
+      fileText: "#6dbcf4",
+      inactiveTab: "#F5F5F5",
+    },
     primary: {
-      main: "#42a5f5",
-      contrastText: "#e3f2fd",
+      main: "#0B7AD5",
+      // contrastText: "#08599B",
     },
     background: {
       basic: "#42a5f5",
-      hero: "#CBC0D3",
-      heroGradient: "#CBC0D3",
-      about: "#8E9AAF",
-      aboutGradient: "#8E9AAF",
-      experience: "#DEE2FF",
-      experienceGradient: "#DEE2FF",
-      projects: "#EFD3D7",
-      projectsGradient: "#EFD3D7",
-      contact: "#D6FEFF",
-      contactGradient: "#D6FEFF",
-      navbar: "#030B11",
+      hero: "#ffc09f",
+      heroGradient: "#ffc09f",
+      about: "#79addc",
+      aboutGradient: "#79addc",
+      experience: "#ffee93",
+      experienceGradient: "#ffee93",
+      projects: "#fcf5c7",
+      projectsGradient: "#fcf5c7",
+      contact: "#adf7b6",
+      contactGradient: "#adf7b6",
+      navbar: "#ffc09f",
     },
   },
 });

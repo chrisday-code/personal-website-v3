@@ -20,7 +20,7 @@ import { ReactComponent as ConfluenceIcon } from "../images/icons/confluence-ico
 import { Element } from "react-scroll";
 import { Skill, SkillIcon } from "../components/Skill";
 import { FillText } from "./mini-components/FillText";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 const skillHeight = "50px";
 const skillWidth = "50px";
@@ -116,7 +116,7 @@ export const About = (props: any) => {
 
   const headingRef = useRef(null);
 
-  //maybe instead of filtering the skills I just make them invisible
+  //I think that when this gets interupted filtered skills doesn't get set correctly
   useEffect(() => {
     if (filter.length === 0) {
       setFilteredSkills(baseSkills);
@@ -124,17 +124,29 @@ export const About = (props: any) => {
     }
     const newSkills: Skill[] = [];
     for (const filterItem of filter) {
+      // console.log("filterItem:", filterItem);
       for (const skill of baseSkills) {
         if (newSkills.includes(skill)) {
+          // console.log("already in:", skill);
           continue;
+        }
+        if (filter.length === 0) {
+          newSkills.push(skill);
         }
         if (skill.type && skill.type.includes(filterItem)) {
           newSkills.push(skill);
         }
       }
     }
-    setFilteredSkills(newSkills);
+    console.log("newSkills:", newSkills);
+    setFilteredSkills([...newSkills]);
   }, [filter, baseSkills]);
+
+  //call this when filter changes
+  useEffect(() => {
+    console.log("filteredSkills changed: ", filteredSkills);
+    // setFilteredSkills([...filteredSkills]);
+  }, [filteredSkills]);
 
   const changeFilter = (value: boolean, type: string) => {
     if (value) {
@@ -146,20 +158,22 @@ export const About = (props: any) => {
     }
   };
 
-  // TODO use variants to gain access to some interesting props
+  const variants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: { scale: 1, opacity: 1 },
+  };
   const renderSkills = (skills: Skill[]) => {
     return (
-      <AnimatePresence mode="sync">
+      <AnimatePresence initial={false} mode="popLayout">
         {skills.map(({ name, Icon, size }: Skill, index) => {
           count.current = count.current + 1;
           return (
             <SkillIcon
               key={name}
-              delay={index}
               name={name}
-              size={size}
               Icon={Icon}
-            />
+              size={size}
+            ></SkillIcon>
           );
         })}
       </AnimatePresence>
@@ -232,28 +246,8 @@ export const About = (props: any) => {
                 websites
               </Typography>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              md={6}
-              // sx={{
-              //   flexGrow: "2",
-              // }}
-            >
-              {/* <Typography
-              variant="h2"
-              sx={{ textAlign: "center", marginBottom: "30px" }}
-              onClick={() => {
-                const newItems = [...filteredSkills];
-                // removeItem(newItems, id);
-                newItems.shift();
-                setFilteredSkills(newItems);
-              }}
-            >
-              Skills
-            </Typography> */}
-              {/* {testPopLayout()} */}
-              <Grid component={motion.div} layout container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={2}>
                 {renderSkills(filteredSkills)}
               </Grid>
             </Grid>

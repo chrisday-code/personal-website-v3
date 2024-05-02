@@ -2,6 +2,7 @@ import * as React from "react";
 import { SVGProps } from "react";
 import { useEffect, useRef } from "react";
 import anime from "animejs/lib/anime.es.js";
+import { useTheme } from "@mui/material/styles";
 
 // TODO import theme to this guy
 // TODO Scrolling animations?
@@ -10,6 +11,7 @@ import anime from "animejs/lib/anime.es.js";
 
 // TODO maximise the images
 export const Laptop = (props: SVGProps<SVGSVGElement>) => {
+  const theme = useTheme();
   const initialized = useRef(false);
   useEffect(() => {
     if (initialized.current) {
@@ -1103,7 +1105,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                 y="24"
                 width="102"
                 height="47"
-                fill="#04121D"
+                fill={theme.palette.background.heroGradient}
               />
               <rect
                 id="website-background-bottom"
@@ -1112,7 +1114,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                 width="102"
                 height="29"
                 rx="4"
-                fill="#04121D"
+                fill={theme.palette.background.heroGradient}
               />
               <rect
                 id="search bar_2"
@@ -1129,7 +1131,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                 y="12"
                 width="102"
                 height="13"
-                fill="black"
+                fill={theme.palette.background.navbar}
               />
               <g id="navbar-text">
                 <line
@@ -1138,7 +1140,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                   y1="17.5"
                   x2="21.0097"
                   y2="17.5"
-                  stroke="white"
+                  stroke={theme.palette.primary.main}
                 />
                 <line
                   id="navbar-sub-1"
@@ -1146,7 +1148,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                   y1="17.5"
                   x2="71.0097"
                   y2="17.5"
-                  stroke="white"
+                  stroke={theme.palette.primary.main}
                 />
                 <line
                   id="navbar-sub-2"
@@ -1154,7 +1156,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                   y1="17.5"
                   x2="85.0097"
                   y2="17.5"
-                  stroke="white"
+                  stroke={theme.palette.primary.main}
                 />
                 <line
                   id="navbar-sub-3"
@@ -1162,7 +1164,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                   y1="17.5"
                   x2="101.01"
                   y2="17.5"
-                  stroke="white"
+                  stroke={theme.palette.primary.main}
                 />
               </g>
               <rect
@@ -1172,7 +1174,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                 width="34"
                 height="18"
                 rx="6"
-                fill="#D9D9D9"
+                fill={theme.palette.primary.main}
               />
               <g id="heading">
                 <rect
@@ -1182,7 +1184,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                   width="39"
                   height="38"
                   rx="6.5"
-                  stroke="#D9D9D9"
+                  stroke={theme.palette.primary.main}
                 />
                 <line
                   id="heading-sub-3"
@@ -1254,7 +1256,7 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
               y="107"
               width="21"
               height="63"
-              fill="#302E2E"
+              fill={theme.palette.vsCodeColors.fileBackground}
             />
             <rect
               id="vs-code-inactive-tab"
@@ -1262,15 +1264,15 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
               y="107"
               width="12"
               height="6"
-              fill="#555151"
+              fill={theme.palette.vsCodeColors.inactiveTab}
             />
             <rect
               id="vs-code-active-tab"
               x="71"
               y="107"
               width="12"
-              height="6"
-              fill="#423F3F"
+              height="7"
+              fill={theme.palette.vsCodeColors.codeBackground}
             />
             <rect
               id="vs-code-files"
@@ -1278,139 +1280,27 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
               y="113"
               width="87"
               height="57"
-              fill="#423F3F"
+              fill={theme.palette.vsCodeColors.codeBackground}
             />
-            <g id="code">
-              <line
-                id="Code 1"
-                x1="76"
-                y1="119.5"
-                x2="126"
-                y2="119.5"
-                stroke="white"
-              />
-              <line
-                id="Code 2"
-                x1="76"
-                y1="125.5"
-                x2="126"
-                y2="125.5"
-                stroke="white"
-              />
-              <line
-                id="Code 3"
-                x1="76"
-                y1="131.5"
-                x2="126"
-                y2="131.5"
-                stroke="white"
-              />
-              <line
-                id="Code 4"
-                x1="76"
-                y1="137.5"
-                x2="126"
-                y2="137.5"
-                stroke="white"
-              />
-              <line
-                id="Code 5"
-                x1="76"
-                y1="143.5"
-                x2="126"
-                y2="143.5"
-                stroke="white"
-              />
-              <line
-                id="Code 6"
-                x1="76"
-                y1="149.5"
-                x2="126"
-                y2="149.5"
-                stroke="white"
-              />
-              <line
-                id="Code 7"
-                x1="76"
-                y1="155.5"
-                x2="80"
-                y2="155.5"
-                stroke="white"
-              />
+            <g id="code" stroke={theme.palette.vsCodeColors.codeText}>
+              <line id="Code 1" x1="76" y1="119.5" x2="126" y2="119.5" />
+              <line id="Code 2" x1="76" y1="125.5" x2="126" y2="125.5" />
+              <line id="Code 3" x1="76" y1="131.5" x2="126" y2="131.5" />
+              <line id="Code 4" x1="76" y1="137.5" x2="126" y2="137.5" />
+              <line id="Code 5" x1="76" y1="143.5" x2="126" y2="143.5" />
+              <line id="Code 6" x1="76" y1="149.5" x2="126" y2="149.5" />
+              <line id="Code 7" x1="76" y1="155.5" x2="80" y2="155.5" />
             </g>
-            <g id="files">
-              <line
-                id="Files 1"
-                x1="55"
-                y1="117.5"
-                x2="66"
-                y2="117.5"
-                stroke="#BBB4B4"
-              />
-              <line
-                id="Files 2"
-                x1="55"
-                y1="122.5"
-                x2="66"
-                y2="122.5"
-                stroke="#BBB4B4"
-              />
-              <line
-                id="Files 3"
-                x1="55"
-                y1="127.5"
-                x2="66"
-                y2="127.5"
-                stroke="#BBB4B4"
-              />
-              <line
-                id="Files 4"
-                x1="55"
-                y1="132.5"
-                x2="66"
-                y2="132.5"
-                stroke="#BBB4B4"
-              />
-              <line
-                id="Files 5"
-                x1="55"
-                y1="137.5"
-                x2="66"
-                y2="137.5"
-                stroke="#BBB4B4"
-              />
-              <line
-                id="Files 6"
-                x1="55"
-                y1="142.5"
-                x2="66"
-                y2="142.5"
-                stroke="#BBB4B4"
-              />
-              <line
-                id="Files 7"
-                x1="55"
-                y1="147.5"
-                x2="66"
-                y2="147.5"
-                stroke="#BBB4B4"
-              />
-              <line
-                id="Files 8"
-                x1="55"
-                y1="152.5"
-                x2="66"
-                y2="152.5"
-                stroke="#BBB4B4"
-              />
-              <line
-                id="Files 9"
-                x1="55"
-                y1="157.5"
-                x2="66"
-                y2="157.5"
-                stroke="#BBB4B4"
-              />
+            <g id="files" stroke={theme.palette.vsCodeColors.fileText}>
+              <line id="Files 1" x1="55" y1="117.5" x2="66" y2="117.5" />
+              <line id="Files 2" x1="55" y1="122.5" x2="66" y2="122.5" />
+              <line id="Files 3" x1="55" y1="127.5" x2="66" y2="127.5" />
+              <line id="Files 4" x1="55" y1="132.5" x2="66" y2="132.5" />
+              <line id="Files 5" x1="55" y1="137.5" x2="66" y2="137.5" />
+              <line id="Files 6" x1="55" y1="142.5" x2="66" y2="142.5" />
+              <line id="Files 7" x1="55" y1="147.5" x2="66" y2="147.5" />
+              <line id="Files 8" x1="55" y1="152.5" x2="66" y2="152.5" />
+              <line id="Files 9" x1="55" y1="157.5" x2="66" y2="157.5" />
             </g>
           </g>
         </g>
