@@ -2,7 +2,6 @@ import { IconContext } from "react-icons";
 import { Grid, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { forwardRef, Ref } from "react";
-import { usePresence } from "framer-motion";
 
 export interface Skill {
   name: string;

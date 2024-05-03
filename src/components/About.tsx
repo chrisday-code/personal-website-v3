@@ -158,10 +158,6 @@ export const About = (props: any) => {
     }
   };
 
-  const variants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: { scale: 1, opacity: 1 },
-  };
   const renderSkills = (skills: Skill[]) => {
     return (
       <AnimatePresence initial={false} mode="popLayout">
