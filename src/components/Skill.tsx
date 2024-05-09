@@ -11,7 +11,6 @@ export interface Skill {
   delay?: number;
   id?: number;
 }
-
 export const SkillIcon = forwardRef(
   ({ name, Icon, size, delay = 0, id }: Skill, ref: Ref<HTMLDivElement>) => {
     return (

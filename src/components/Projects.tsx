@@ -54,9 +54,9 @@ export const Projects = (props: any) => {
     },
     {
       name: "Movie club",
-      about: "React website",
-      github: "https://github.com/chrisday-code",
-      live: "https://github.com/chrisday-code",
+      about: "React project for my movie club",
+      github: "https://github.com/chrisday-code/movie-club-v3",
+      live: "https://harc-movie-club.com",
       skills: [
         {
           name: "Javascript",

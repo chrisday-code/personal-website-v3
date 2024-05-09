@@ -22,6 +22,7 @@ import { Skill, SkillIcon } from "../components/Skill";
 import { FillText } from "./mini-components/FillText";
 import { AnimatePresence } from "framer-motion";
 
+const baseSkillHeight = 50;
 const skillHeight = "50px";
 const skillWidth = "50px";
 
@@ -243,7 +244,11 @@ export const About = (props: any) => {
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Grid container spacing={2}>
+              <Grid
+                container
+                spacing={2}
+                sx={{ minHeight: `${baseSkillHeight * 4}px` }}
+              >
                 {renderSkills(filteredSkills)}
               </Grid>
             </Grid>
