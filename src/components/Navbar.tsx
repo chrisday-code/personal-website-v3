@@ -119,10 +119,8 @@ export const Navbar = ({ toggleTheme }: NavbarProps) => {
   const firstRef = useRef(false);
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-  // const [running, setRunning] = useState(false);
   useEffect(() => {
     let iteration = 0;
-    // console.log("hovered: ", logoHovered);
     if (firstRef.current && !logoHovered) {
       return;
     }

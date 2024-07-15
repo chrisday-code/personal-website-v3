@@ -32,13 +32,9 @@ export const Contact = (props: any) => {
         )
         .then(
           (result) => {
-            console.log(result.text);
             setFormSuccess(true);
-            console.log(formSuccess);
           },
-          (error) => {
-            console.log(error.text);
-          }
+          (error) => {}
         );
     }
   };
@@ -84,7 +80,7 @@ export const Contact = (props: any) => {
             variant="h6"
             sx={{ textAlign: "center", marginBottom: "2%" }}
           >
-            Send me an email or contact me below
+            Send me an email or contact me here
           </Typography>
           <form
             onSubmit={handleSubmit((data) => {
@@ -206,7 +202,7 @@ export const Contact = (props: any) => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h6" sx={{ padding: "3%" }}>
+          <Typography variant="h6" sx={{ padding: "3% 0% 10% 0%" }}>
             Find me online at
           </Typography>
           <Iconbar />

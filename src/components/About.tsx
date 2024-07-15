@@ -17,6 +17,8 @@ import { FaCogs } from "react-icons/fa";
 import { ReactComponent as SassIcon } from "../images/icons/sass-icon.svg";
 import { ReactComponent as AwsIcon } from "../images/icons/aws-icon.svg";
 import { ReactComponent as ConfluenceIcon } from "../images/icons/confluence-icon.svg";
+import { ReactComponent as NextJSIcon } from "../images/icons/nextjs-icon.svg";
+import { ReactComponent as TailwindIcon } from "../images/icons/tailwind-icon.svg";
 import { Element } from "react-scroll";
 import { Skill, SkillIcon } from "../components/Skill";
 import { FillText } from "./mini-components/FillText";
@@ -71,6 +73,11 @@ const skills: Skill[] = [
     type: ["FE"],
   },
   {
+    name: "Tailwind",
+    Icon: <TailwindIcon height={skillHeight} width={skillWidth} />,
+    type: ["FE"],
+  },
+  {
     name: "Git",
     Icon: <GitIcon height={skillHeight} width={skillWidth} />,
     type: ["Dev"],
@@ -101,6 +108,11 @@ const skills: Skill[] = [
     type: ["FE"],
   },
   {
+    name: "NextJS",
+    Icon: <NextJSIcon height={skillHeight} width={skillWidth} />,
+    type: ["FE"],
+  },
+  {
     name: "Typescript",
     Icon: <TypescriptIcon height={skillHeight} width={skillWidth} />,
     type: ["FE", "BE"],
@@ -125,10 +137,8 @@ export const About = (props: any) => {
     }
     const newSkills: Skill[] = [];
     for (const filterItem of filter) {
-      // console.log("filterItem:", filterItem);
       for (const skill of baseSkills) {
         if (newSkills.includes(skill)) {
-          // console.log("already in:", skill);
           continue;
         }
         if (filter.length === 0) {
@@ -139,15 +149,11 @@ export const About = (props: any) => {
         }
       }
     }
-    console.log("newSkills:", newSkills);
     setFilteredSkills([...newSkills]);
   }, [filter, baseSkills]);
 
   //call this when filter changes
-  useEffect(() => {
-    console.log("filteredSkills changed: ", filteredSkills);
-    // setFilteredSkills([...filteredSkills]);
-  }, [filteredSkills]);
+  useEffect(() => {}, [filteredSkills]);
 
   const changeFilter = (value: boolean, type: string) => {
     if (value) {

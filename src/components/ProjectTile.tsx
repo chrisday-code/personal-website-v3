@@ -88,10 +88,10 @@ export const ProjectTile = (project: ProjectType) => {
             {project.name}
           </Typography>
           <Box>
-            <IconButton href={project.github}>
+            <IconButton href={project.github} color="primary">
               <FaGithub />
             </IconButton>
-            <IconButton href={project.live}>
+            <IconButton href={project.live} color="primary">
               <FaExternalLinkAlt />
             </IconButton>
           </Box>

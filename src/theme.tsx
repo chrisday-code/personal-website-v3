@@ -89,8 +89,9 @@ export const darkTheme = createTheme({
     fontFamily: "Open Sans",
     h1: {
       fontFamily: "Alegreya Sans",
-      fontSize: "4em",
+      fontSize: "5em",
       textAlign: "center",
+      fontWeight: "600",
     },
     h2: {
       fontSize: "3em",
@@ -132,6 +133,7 @@ export const darkTheme = createTheme({
       contrastText: "#c3012f",
     },
     background: {
+      paper: "#121212",
       basic: "#1e1e1e",
       hero: "#091d2c",
       heroGradient: "#030B11",
@@ -177,8 +179,9 @@ export const lightTheme = createTheme({
     fontFamily: "Open Sans",
     h1: {
       fontFamily: "Alegreya Sans",
-      fontSize: "4em",
+      fontSize: "5em",
       textAlign: "center",
+      fontWeight: "600",
     },
     h2: {
       fontSize: "3em",
@@ -206,8 +209,8 @@ export const lightTheme = createTheme({
   palette: {
     mode: "light",
     text: {
-      primary: "#000000",
-      secondary: "#08599B",
+      primary: "#FFFFFF",
+      secondary: "#FFFFFF",
     },
     vsCodeColors: {
       codeBackground: "#FFFFFF",
@@ -217,22 +220,23 @@ export const lightTheme = createTheme({
       inactiveTab: "#F5F5F5",
     },
     primary: {
-      main: "#0B7AD5",
-      // contrastText: "#08599B",
+      main: "#FFFFFF",
+      contrastText: "#FFFFFF",
     },
     background: {
-      basic: "#42a5f5",
-      hero: "#ffc09f",
-      heroGradient: "#ffc09f",
-      about: "#79addc",
-      aboutGradient: "#79addc",
-      experience: "#ffee93",
-      experienceGradient: "#ffee93",
-      projects: "#fcf5c7",
-      projectsGradient: "#fcf5c7",
-      contact: "#adf7b6",
-      contactGradient: "#adf7b6",
-      navbar: "#ffc09f",
+      paper: "#121212",
+      basic: "#4A94FC",
+      hero: "#4A94FC",
+      heroGradient: "#249adf",
+      about: "#525252",
+      aboutGradient: "#474747",
+      experience: "#446488",
+      experienceGradient: "#446488",
+      projects: "#525252",
+      projectsGradient: "#474747",
+      contact: "#006366",
+      contactGradient: "#004F52",
+      navbar: "#249adf",
     },
   },
 });

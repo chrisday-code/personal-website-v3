@@ -1143,8 +1143,16 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                   stroke={theme.palette.primary.main}
                 />
                 <line
+                  id="navbar-sub-0"
+                  x1="56.0097"
+                  y1="17.5"
+                  x2="61.0097"
+                  y2="17.5"
+                  stroke={theme.palette.primary.main}
+                />
+                <line
                   id="navbar-sub-1"
-                  x1="61.0097"
+                  x1="64.0097"
                   y1="17.5"
                   x2="71.0097"
                   y2="17.5"
@@ -1177,46 +1185,22 @@ export const Laptop = (props: SVGProps<SVGSVGElement>) => {
                 fill={theme.palette.primary.main}
               />
               <g id="heading">
-                <rect
-                  id="heading-box"
-                  x="9.5097"
-                  y="38.5"
-                  width="39"
-                  height="38"
-                  rx="6.5"
-                  stroke={theme.palette.primary.main}
-                />
-                <line
-                  id="heading-sub-3"
-                  x1="17.0097"
-                  y1="61.5"
-                  x2="35.0097"
-                  y2="61.5"
-                  stroke="white"
-                />
-                <line
-                  id="heading-sub-2"
-                  x1="17.0097"
-                  y1="57.5"
-                  x2="35.0097"
-                  y2="57.5"
-                  stroke="white"
-                />
                 <line
                   id="heading-sub-1"
-                  x1="17.0097"
-                  y1="53.5"
-                  x2="35.0097"
-                  y2="53.5"
+                  x1="15"
+                  y1="55.5"
+                  x2="40"
+                  y2="55.5"
                   stroke="white"
                 />
                 <line
                   id="heading-title"
                   x1="15.0097"
-                  y1="47.5"
-                  x2="40.0097"
-                  y2="47.5"
+                  y1="49.5"
+                  x2="35"
+                  y2="49.5"
                   stroke="white"
+                  strokeWidth={2}
                 />
               </g>
             </g>
