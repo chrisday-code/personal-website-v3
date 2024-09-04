@@ -1,11 +1,9 @@
 import { Box } from "@mui/material";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
-import { FaGoodreads } from "react-icons/fa";
 import { Link } from "@mui/material";
 import { IconContext } from "react-icons";
 import { useState } from "react";
-import { FaSpotify } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import { useTheme } from "@mui/material/styles";
 import { IoDocumentTextOutline } from "react-icons/io5";

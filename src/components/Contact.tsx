@@ -5,7 +5,7 @@ import { Element } from "react-scroll";
 import { useRef } from "react";
 import { Iconbar } from "./Iconbar";
 import { TextField, Button } from "@mui/material";
-import { useState } from "react";
+// import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { useForm, Controller } from "react-hook-form";
 
@@ -19,7 +19,7 @@ interface FormData {
 export const Contact = (props: any) => {
   const form = useRef<HTMLFormElement>(null);
 
-  const [formSuccess, setFormSuccess] = useState(false);
+  // const [formSuccess, setFormSuccess] = useState(false);
 
   const sendEmail = () => {
     if (form.current) {
@@ -32,7 +32,7 @@ export const Contact = (props: any) => {
         )
         .then(
           (result) => {
-            setFormSuccess(true);
+            // setFormSuccess(true);
           },
           (error) => {}
         );
