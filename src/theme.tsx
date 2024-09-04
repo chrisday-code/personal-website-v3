@@ -42,6 +42,7 @@ declare module "@mui/material/styles" {
     basic: string;
     hero: string;
     heroGradient: string;
+    job: string;
     about: string;
     aboutGradient: string;
     experience: string;
@@ -135,6 +136,7 @@ export const darkTheme = createTheme({
     background: {
       paper: "#121212",
       basic: "#1e1e1e",
+      job: "#1e1e1e",
       hero: "#091d2c",
       heroGradient: "#030B11",
       about: "#1F1F1F",
@@ -226,6 +228,7 @@ export const lightTheme = createTheme({
     background: {
       paper: "#121212",
       basic: "#4A94FC",
+      job: "#1e1e1e",
       hero: "#4A94FC",
       heroGradient: "#249adf",
       about: "#525252",

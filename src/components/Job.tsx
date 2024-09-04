@@ -46,8 +46,15 @@ export const Job = ({
     });
   };
 
+  const openInNewTab = (url: string) => {
+    window.open(url, "_blank", "noreferrer");
+  };
+
   return (
     <Box
+      onClick={() => {
+        openInNewTab(link);
+      }}
       onMouseEnter={() => {
         setHovered(true);
       }}
@@ -58,7 +65,7 @@ export const Job = ({
         display: "flex",
         flexDirection: "row",
         backgroundColor: !hovered
-          ? theme.palette.background.basic
+          ? theme.palette.background.job
           : theme.palette.background.hero,
         padding: "1em",
         margin: "0.5em",

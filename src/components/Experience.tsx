@@ -33,7 +33,7 @@ export const Experience = (props: any) => {
       start: "January 2020",
       end: "August 2021",
       description: [
-        "Creating projects that streamline work for teams across transport. I created sensors used to monitor track faults at central station, helped make a test board",
+        "Creating projects that streamline work for teams across transport. Created sensors form monitoring track faults at central station, automated a manual process with VBA, created a test board",
       ],
       link: "https://transportnsw.info/",
       skills: [
@@ -50,9 +50,9 @@ export const Experience = (props: any) => {
       start: "January 2016",
       end: "December 2019",
       description: [
-        "Fixing PCBs and updating code on factory machinery. Also, helping with installation of new machinery and designing new products",
+        "Fixing PCBs and updating code on factory machinery. Writing python scripts to interpret sensor data & soldering new capacitors into circuit boards.",
       ],
-      link: "https://transportnsw.info/",
+      link: "https://gjames.com/",
       skills: ["Python", "Wiring", "VBA", "Soldering"],
     },
   ];
