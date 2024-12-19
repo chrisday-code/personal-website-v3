@@ -12,6 +12,8 @@ import { ReactComponent as NodeJsIcon } from "../images/icons/nodejs-icon.svg";
 import { ReactComponent as PostgreSQLIcon } from "../images/icons/postgresql-icon.svg";
 import { ReactComponent as ReactIcon } from "../images/icons/react-icon.svg";
 import { ReactComponent as TypescriptIcon } from "../images/icons/typescript-icon.svg";
+import { ReactComponent as GraphQL } from "../images/icons/graphql-icon.svg";
+import { ReactComponent as Expo } from "../images/icons/expo-icon.svg";
 import { FcCommandLine } from "react-icons/fc";
 import { FaCogs } from "react-icons/fa";
 import { ReactComponent as SassIcon } from "../images/icons/sass-icon.svg";
@@ -30,6 +32,56 @@ const skillWidth = "50px";
 
 const skills: Skill[] = [
   {
+    name: "React",
+    Icon: <ReactIcon height={skillHeight} width={skillWidth} />,
+    type: ["FE"],
+  },
+  {
+    name: "NodeJS",
+    Icon: <NodeJsIcon height={skillHeight} width={skillWidth} />,
+    type: ["BE"],
+  },
+  {
+    name: "GraphQL",
+    Icon: <GraphQL height={skillHeight} width={skillWidth} />,
+    type: ["BE"],
+  },
+  {
+    name: "Expo",
+    Icon: <Expo height={skillHeight} width={skillWidth} />,
+    type: ["FE"],
+  },
+  {
+    name: "Javascript",
+    Icon: <JavascriptIcon height={skillHeight} width={skillWidth} />,
+    type: ["FE", "BE"],
+  },
+  {
+    name: "PostgreSQL",
+    Icon: <PostgreSQLIcon height={skillHeight} width={skillWidth} />,
+    type: ["BE"],
+  },
+  {
+    name: "Typescript",
+    Icon: <TypescriptIcon height={skillHeight} width={skillWidth} />,
+    type: ["FE", "BE"],
+  },
+  {
+    name: "NextJS",
+    Icon: <NextJSIcon height={skillHeight} width={skillWidth} />,
+    type: ["FE"],
+  },
+  {
+    name: "AWS",
+    Icon: <AwsIcon height={skillHeight} width={skillWidth} />,
+    type: ["BE"],
+  },
+  {
+    name: "Tailwind",
+    Icon: <TailwindIcon height={skillHeight} width={skillWidth} />,
+    type: ["FE"],
+  },
+  {
     name: "cmd",
     Icon: <FcCommandLine />,
     size: skillHeight,
@@ -41,16 +93,10 @@ const skills: Skill[] = [
     size: skillHeight,
     type: ["FE", "BE"],
   },
-
   {
     name: "Sass",
     Icon: <SassIcon height={skillHeight} width={skillWidth} />,
     type: ["FE"],
-  },
-  {
-    name: "AWS",
-    Icon: <AwsIcon height={skillHeight} width={skillWidth} />,
-    type: ["BE"],
   },
   {
     name: "Confluence",
@@ -73,11 +119,6 @@ const skills: Skill[] = [
     type: ["FE"],
   },
   {
-    name: "Tailwind",
-    Icon: <TailwindIcon height={skillHeight} width={skillWidth} />,
-    type: ["FE"],
-  },
-  {
     name: "Git",
     Icon: <GitIcon height={skillHeight} width={skillWidth} />,
     type: ["Dev"],
@@ -86,36 +127,6 @@ const skills: Skill[] = [
     name: "HTML5",
     Icon: <HtmlIcon height={skillHeight} width={skillWidth} />,
     type: ["FE"],
-  },
-  {
-    name: "Javascript",
-    Icon: <JavascriptIcon height={skillHeight} width={skillWidth} />,
-    type: ["FE", "BE"],
-  },
-  {
-    name: "NodeJS",
-    Icon: <NodeJsIcon height={skillHeight} width={skillWidth} />,
-    type: ["BE"],
-  },
-  {
-    name: "PostgreSQL",
-    Icon: <PostgreSQLIcon height={skillHeight} width={skillWidth} />,
-    type: ["BE"],
-  },
-  {
-    name: "React",
-    Icon: <ReactIcon height={skillHeight} width={skillWidth} />,
-    type: ["FE"],
-  },
-  {
-    name: "NextJS",
-    Icon: <NextJSIcon height={skillHeight} width={skillWidth} />,
-    type: ["FE"],
-  },
-  {
-    name: "Typescript",
-    Icon: <TypescriptIcon height={skillHeight} width={skillWidth} />,
-    type: ["FE", "BE"],
   },
 ];
 
@@ -194,23 +205,26 @@ export const About = (props: any) => {
           paddingTop: "10vh",
           paddingLeft: "10vw",
           paddingRight: "10vw",
+          paddingBottom: {
+            xs: "10vh",
+            md: 0,
+          },
           backgroundImage: `linear-gradient(to top, ${theme.palette.background.about}, ${theme.palette.background.aboutGradient})`,
         }}
       >
         <Box
           display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="space-around"
           gap="1em"
           sx={{
+            flexDirection: "column",
+            alignItems: { sm: "flex-start", md: "center" },
             maxWidth: "1500px",
             height: "100%",
           }}
         >
           <Typography
             variant="h1"
-            sx={{ marginBottom: { xs: "3vh", md: "10vh" } }}
+            sx={{ marginBottom: { xs: "3vh", md: "10vh" }, paddingLeft: 0 }}
             ref={headingRef}
           >
             About Me
@@ -218,7 +232,10 @@ export const About = (props: any) => {
           <Grid container>
             <Grid item xs={12} md={6}>
               <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
-                Hi, I'm Chris. I'm a developer with{" "}
+                I have been a software engineer for 4 years.
+              </Typography>
+              <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
+                I have excellent{" "}
                 <FillText
                   textColor={theme.palette.primary.contrastText}
                   text="front"
@@ -232,7 +249,7 @@ export const About = (props: any) => {
                   type="BE"
                   change={changeFilter}
                 />{" "}
-                end experience, as well as a variety of development{" "}
+                end knowledge. I'm also familiar with most industry standard{" "}
                 <FillText
                   textColor={theme.palette.primary.contrastText}
                   text="tools"
@@ -241,12 +258,8 @@ export const About = (props: any) => {
                 />
               </Typography>
               <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
-                I have a BEng in Computer & Electrical Engineering from the
-                University of Queensland 🇦🇺
-              </Typography>
-              <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
-                My main focus these days is making beautiful, functional
-                websites
+                I have a Bachelor of Engineering (honours) in Computer &
+                Electrical Engineering from the University of Queensland 🇦🇺
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>

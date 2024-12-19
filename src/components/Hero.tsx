@@ -54,10 +54,7 @@ export const Hero = (props: any) => {
                 justifyContent: { xs: "center" },
               }}
             >
-              <Typography variant="h1">Hi, I'm Chris.</Typography>
-              <Typography variant="h4">
-                I'm a software engineer and I love making stuff
-              </Typography>
+              <Typography variant="h1">Hi, I'm Chris</Typography>
             </Box>
             <Box
               sx={{

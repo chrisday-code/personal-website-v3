@@ -85,11 +85,11 @@ export const Iconbar = (props: any) => {
       link: "https://www.linkedin.com/in/christopher-day-046/",
       Icon: <FaLinkedin height="20px" width="20px" />,
     },
-    {
-      highlightColor: "#ffc01e",
-      link: "https://leetcode.com/ChrisDay/",
-      Icon: <SiLeetcode height="20px" width="20px" />,
-    },
+    // {
+    //   highlightColor: "#ffc01e",
+    //   link: "https://leetcode.com/ChrisDay/",
+    //   Icon: <SiLeetcode height="20px" width="20px" />,
+    // },
   ];
 
   const renderIcons = (icons: Icon[]) => {
@@ -115,10 +115,10 @@ export const Iconbar = (props: any) => {
       }}
     >
       {renderIcons(icons)}
-      <IconDownload
+      {/* <IconDownload
         highlightColor="#b9ad99"
         Icon={<IoDocumentTextOutline height="20px" width="20px" />}
-      />
+      /> */}
     </Box>
   );
 };

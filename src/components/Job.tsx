@@ -1,4 +1,12 @@
-import { Typography, Chip } from "@mui/material";
+import {
+  Typography,
+  Chip,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from "@mui/material";
+import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
 import { Box } from "@mui/material";
 import React, { useState } from "react";
 import { JobInterface } from "../interfaces";
@@ -32,18 +40,20 @@ export const Job = ({
   };
 
   const renderDescription = (description: Array<string>) => {
-    return description.map((line: string, index) => {
-      return (
-        <Typography
-          key={index}
-          variant="body2"
-          paddingBottom="1em"
-          sx={{ color: "white" }}
-        >
-          {line}
-        </Typography>
-      );
-    });
+    return (
+      <List dense sx={{ listStyleType: "disc" }}>
+        {description.map((line: string, index) => {
+          return (
+            <ListItem key={index}>
+              <ListItemIcon>
+                <HorizontalRuleIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>{line}</ListItemText>
+            </ListItem>
+          );
+        })}
+      </List>
+    );
   };
 
   const openInNewTab = (url: string) => {
@@ -79,20 +89,20 @@ export const Job = ({
         <Box
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", md: "row-reverse" },
+            flexDirection: { xs: "column-reverse", md: "row-reverse" },
             alignItems: { xs: "flex-start", md: "center" },
             justifyContent: "space-between",
             width: "100%",
           }}
         >
-          <Typography variant="body2" sx={{ margin: 0 }}>
+          <Typography variant="body1" sx={{ margin: 0 }}>
             {start} — {end}
           </Typography>
-          <Typography variant="h6" sx={{ margin: 0 }}>
+          <Typography variant="h4" sx={{ margin: 0 }}>
             {position}
           </Typography>
         </Box>
-        <Typography variant="h6" sx={{ margin: 0 }}>
+        <Typography variant="body1" sx={{ margin: 0 }}>
           {company}
         </Typography>
         {renderDescription(description)}

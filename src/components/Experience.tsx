@@ -8,23 +8,49 @@ import { JobInterface } from "../interfaces";
 export const Experience = (props: any) => {
   const jobs: JobInterface[] = [
     {
-      position: "Software Engineer",
+      position: "Staff Software Engineer",
       company: "Transport for New South Wales - Transport Connect",
-      start: "August 2021",
+      start: "August 2022",
       end: "Present",
       description: [
-        "Building and maintaining front & back end components for the Transport connect system." +
-          "Working closely with product teams to implement new features and improve products ",
+        "Automated a new payment review process saving customers thousands of dollars in incorrect charges and decreasing ticket volume by ~30%",
+        "Developed GraphQL backend cursor pagination which greatly improved load times and database performance",
+        "Built reusable UI components and custom hooks for user and activity pages for a React project",
+        "Designed and built config for fare free days for Trip Planner",
+        "Trained and mentored junior developers in React, SQL and Angular",
       ],
       link: "https://connect.transportnsw.info/",
       skills: [
         "React",
-        "Angular",
+        "React Native",
         "NodeJS",
         "AWS",
         "SQL",
         "Javascript",
         "Typescript",
+        "NextJS",
+        "Angular",
+      ],
+    },
+    {
+      position: "Graduate Software Engineer",
+      company: "Transport for New South Wales - Transport Connect",
+      start: "August 2021",
+      end: "August 2022",
+      description: [
+        "Redesigned and built user activities display, added granularity to search functionality and redesigned user pages for Angular site",
+        "Created monitoring & alerting for financial data in Sumologic & NewRelic  that integrates with OpsGenie, Slack and OTConnect",
+        "Built and maintained front & back end components for the Transport connect system.",
+      ],
+      link: "https://connect.transportnsw.info/",
+      skills: [
+        "React",
+        "Javascript",
+        "Typescript",
+        "Angular",
+        "NodeJS",
+        "AWS",
+        "SQL",
       ],
     },
     {
@@ -33,16 +59,11 @@ export const Experience = (props: any) => {
       start: "January 2020",
       end: "August 2021",
       description: [
-        "Creating projects that streamline work for teams across transport. Created sensors form monitoring track faults at central station, automated a manual process with VBA, created a test board",
+        "Reduced test case creation time by 90% with VBA script",
+        "Reduced maintenance time on platform 23 on central station by 2 hours by creating a firmware logging box & python script",
       ],
       link: "https://transportnsw.info/",
-      skills: [
-        "Python",
-        "Javascript",
-        "Rasperry Pi",
-        "Signal Engineering",
-        "VBA",
-      ],
+      skills: ["Python", "VBA", "Rasperry Pi", "Signal Engineering"],
     },
     {
       position: "Intern",
@@ -50,10 +71,11 @@ export const Experience = (props: any) => {
       start: "January 2016",
       end: "December 2019",
       description: [
-        "Fixing PCBs and updating code on factory machinery. Writing python scripts to interpret sensor data & soldering new capacitors into circuit boards.",
+        "Wrote python scripts to automate data entry",
+        "Soldered replacement capacitors a new control box for the glass cutting machine",
       ],
       link: "https://gjames.com/",
-      skills: ["Python", "Wiring", "VBA", "Soldering"],
+      skills: ["Python", "Soldering"],
     },
   ];
 

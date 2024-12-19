@@ -80,7 +80,6 @@ export const Projects = (props: any) => {
         },
       ],
       image: MovieClub,
-      //   image: <img src={Nintendo} alt="Nintento" />,
     },
     {
       name: "Chemistry Helper",
@@ -102,7 +101,6 @@ export const Projects = (props: any) => {
         },
       ],
       image: ChemistryHelper,
-      //   image: <img src={Nintendo} alt="Nintento" />,
     },
   ];
 
