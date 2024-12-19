@@ -4,9 +4,9 @@ import { FaLinkedin } from "react-icons/fa";
 import { Link } from "@mui/material";
 import { IconContext } from "react-icons";
 import { useState } from "react";
-import { SiLeetcode } from "react-icons/si";
+// import { SiLeetcode } from "react-icons/si";
 import { useTheme } from "@mui/material/styles";
-import { IoDocumentTextOutline } from "react-icons/io5";
+// import { IoDocumentTextOutline } from "react-icons/io5";
 
 interface Icon {
   baseColor?: string;
