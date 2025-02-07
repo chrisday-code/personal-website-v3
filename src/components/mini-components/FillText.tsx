@@ -5,6 +5,7 @@ interface FillTextProps {
   text: string;
   textColor: string;
   type: string;
+  isSelected: boolean;
   change: (value: boolean, text: string) => void;
 }
 
@@ -15,6 +16,7 @@ export const FillText = (props: FillTextProps) => {
 
   // function that calls the filter
 
+  //todo remove useless useEffect
   useEffect(() => {
     const checkChanges = (myValue: boolean) => {
       props.change(myValue, props.type);
@@ -56,8 +58,9 @@ export const FillText = (props: FillTextProps) => {
       style={{
         cursor: "pointer",
         fontWeight: "bold",
-        WebkitTextFillColor: value ? props.textColor : "rgb(0, 0, 0, 0)",
-        WebkitTextStrokeWidth: value ? "0" : "0.08rem",
+        WebkitTextFillColor:
+          props.isSelected || value ? props.textColor : "rgb(0, 0, 0, 0)",
+        WebkitTextStrokeWidth: props.isSelected || value ? "0" : "0.08rem",
       }}
     >
       {props.text}

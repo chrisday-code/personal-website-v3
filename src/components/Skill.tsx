@@ -10,9 +10,13 @@ export interface Skill {
   type?: string[];
   delay?: number;
   id?: number;
+  duration?: number;
 }
 export const SkillIcon = forwardRef(
-  ({ name, Icon, size, delay = 0, id }: Skill, ref: Ref<HTMLDivElement>) => {
+  (
+    { name, Icon, size, delay = 0, id, duration = 0.4 }: Skill,
+    ref: Ref<HTMLDivElement>
+  ) => {
     return (
       <Grid
         item
@@ -22,7 +26,7 @@ export const SkillIcon = forwardRef(
         initial={{ scale: 0, opacity: 0 }}
         exit={{ scale: 0 }}
         layout
-        transition={{ type: "spring", duration: 0.4 }}
+        transition={{ type: "spring", duration: duration }}
         ref={ref}
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >

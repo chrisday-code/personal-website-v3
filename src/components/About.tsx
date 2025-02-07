@@ -130,6 +130,11 @@ const skills: Skill[] = [
   },
 ];
 
+interface FilterType {
+  type: string;
+  name: string;
+}
+
 export const About = (props: any) => {
   const theme = useTheme();
   const [baseSkills] = useState<Array<Skill>>(skills);
@@ -140,19 +145,14 @@ export const About = (props: any) => {
 
   const headingRef = useRef(null);
 
-  //I think that when this gets interupted filtered skills doesn't get set correctly
-  useEffect(() => {
-    if (filter.length === 0) {
-      setFilteredSkills(baseSkills);
-      return;
-    }
+  const setFilteredHelper = (customFilter: string[]) => {
     const newSkills: Skill[] = [];
-    for (const filterItem of filter) {
+    for (const filterItem of customFilter) {
       for (const skill of baseSkills) {
         if (newSkills.includes(skill)) {
           continue;
         }
-        if (filter.length === 0) {
+        if (customFilter.length === 0) {
           newSkills.push(skill);
         }
         if (skill.type && skill.type.includes(filterItem)) {
@@ -161,10 +161,17 @@ export const About = (props: any) => {
       }
     }
     setFilteredSkills([...newSkills]);
-  }, [filter, baseSkills]);
+  };
 
-  //call this when filter changes
-  useEffect(() => {}, [filteredSkills]);
+  //I think that when this gets interupted filtered skills doesn't get set correctly
+  useEffect(() => {
+    setCounter(3);
+    if (filter.length === 0) {
+      setFilteredSkills(baseSkills);
+      return;
+    }
+    setFilteredHelper(filter);
+  }, [filter, baseSkills]);
 
   const changeFilter = (value: boolean, type: string) => {
     if (value) {
@@ -176,13 +183,39 @@ export const About = (props: any) => {
     }
   };
 
-  const renderSkills = (skills: Skill[]) => {
+  const types: FilterType[] = [
+    { name: "front", type: "FE" },
+    { name: "back", type: "BE" },
+    { name: "tools", type: "Dev" },
+  ];
+
+  const [counter, setCounter] = useState<number>(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounter((prevCounter) => (prevCounter + 1) % 4);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (filter.length === 0) {
+      if (counter !== 3) {
+        setFilteredHelper([types[counter].type]);
+        return;
+      }
+      setFilteredSkills(baseSkills);
+    }
+  }, [counter]);
+
+  const renderSkills = (skills: Skill[], duration: number) => {
     return (
       <AnimatePresence initial={false} mode="popLayout">
         {skills.map(({ name, Icon, size }: Skill, index) => {
           count.current = count.current + 1;
           return (
             <SkillIcon
+              duration={duration}
               key={name}
               name={name}
               Icon={Icon}
@@ -231,8 +264,9 @@ export const About = (props: any) => {
           </Typography>
           <Grid container>
             <Grid item xs={12} md={6}>
+              <Typography variant="h3"></Typography>
               <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
-                I have been a software engineer for 4 years.
+                I have 4 years of experience as a software engineer.
               </Typography>
               <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
                 I have excellent{" "}
@@ -241,6 +275,10 @@ export const About = (props: any) => {
                   text="front"
                   type="FE"
                   change={changeFilter}
+                  isSelected={
+                    // filter.length === 0 &&
+                    counter !== 3 && types[counter].name === "front"
+                  }
                 />{" "}
                 &{" "}
                 <FillText
@@ -248,6 +286,11 @@ export const About = (props: any) => {
                   text="back"
                   type="BE"
                   change={changeFilter}
+                  isSelected={
+                    filter.length === 0 &&
+                    counter !== 3 &&
+                    types[counter].name === "back"
+                  }
                 />{" "}
                 end knowledge. I'm also familiar with most industry standard{" "}
                 <FillText
@@ -255,6 +298,11 @@ export const About = (props: any) => {
                   text="tools"
                   type="Dev"
                   change={changeFilter}
+                  isSelected={
+                    filter.length === 0 &&
+                    counter !== 3 &&
+                    types[counter].name === "tools"
+                  }
                 />
               </Typography>
               <Typography variant="h3" sx={{ paddingBottom: "3vh" }}>
@@ -268,7 +316,7 @@ export const About = (props: any) => {
                 spacing={2}
                 sx={{ minHeight: `${baseSkillHeight * 4}px` }}
               >
-                {renderSkills(filteredSkills)}
+                {renderSkills(filteredSkills, filter.length === 0 ? 1 : 0.4)}
               </Grid>
             </Grid>
           </Grid>
